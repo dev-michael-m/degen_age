@@ -1,0 +1,76 @@
+.circle-medium {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: rgba(224, 160, 255,0.4);
+    margin-left: auto;
+}
+
+.circle-large {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba(224, 160, 255,0.4);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-inner {
+    width: 215px;
+    height: 200px;
+}
+
+.section-2-img {
+    width: 50%;
+}
+
+.circle-container {
+    width: 50%;
+}
+
+.hero-section-doc {
+    margin-bottom: 12%;
+    text-align: center;
+}
+
+.section-3 {
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1080px) {
+    .artist-doc {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .section-2 {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .section-2-img {
+        width: 100%;
+    }
+
+    .section-3 {
+        flex-direction: column-reverse;
+    }
+
+    .circle-container {
+        width: 100%;
+        margin-top: 80px;
+    }
+
+    .section-3-img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .hero-section-doc {
+        margin: auto;
+    }
+}
+

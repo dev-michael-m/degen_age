@@ -1,0 +1,60 @@
+.landing-page {
+    height: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255,255,255);
+}
+
+.landing-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.typewriter h2 {
+    color: #fff;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid rgb(255,255,255); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 1.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
+
+  .bubble {
+    position: absolute;
+    top: 50%;
+    right: 41%;
+    z-index: -1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.52);
+    animation: ripple 7s infinite linear;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(7);
+      opacity: 0;
+    }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: rgb(255,255,255) }
+  }

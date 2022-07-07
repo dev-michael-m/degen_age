@@ -1,0 +1,86 @@
+.item-card {
+    margin: 10px;
+    border-radius: 10px;
+    width: 350px;
+    height: 500px;
+    background-color: gray;
+    color: white;
+    box-shadow: 0px 2px 10px black;
+    position: relative;
+    opacity: 0.82;
+}
+
+.card-wrapper {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    flex-direction: column;
+    height: 95%;
+}
+
+.item-card.card-selected {
+    opacity: 1;
+}
+
+.card-selected .card-wrapper {
+    height: 82%;
+}
+
+.card-selected {
+    transform: scale(1.15);
+    z-index: 20;
+}
+
+.value-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.value-item {
+    width: 132px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    background-color: deepskyblue;
+    color: white;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.60);
+}
+
+.value-item label {
+    font-size: 14px;
+}
+
+.chipped {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    transform: rotate(45deg);
+    position: relative;
+    bottom: 4px;
+}
+
+.purchase-primary {
+    background-color: deepskyblue !important;
+}
+
+.purchase-primary:hover {
+    background-color: rgb(3, 141, 187) !important;
+}
+
+.purple-pink-bg {
+    background: linear-gradient(#6c1eb4, #b8198e)
+}
+
+.peach-bg {
+    background: linear-gradient(#d27f6e, #b8198e);
+}
+
+.sea-bg {
+    background: linear-gradient(#6ebbd2, #19b861);
+}

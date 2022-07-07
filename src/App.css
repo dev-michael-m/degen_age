@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App p{
+  text-align: left;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -11,6 +15,113 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.parallax-container {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 300px;
+}
+
+.accent {
+  color: wheat;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(10vh);
+  visibility: hidden;
+  transition: opacity 1s ease-out, transform 0.75s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-10vh);
+  visibility: hidden;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(10vh);
+  visibility: hidden;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  transition-delay: 0.5s;
+  will-change: opacity, visibility;
+}
+
+.fade-in-bottom {
+  opacity: 0;
+  transform: translateY(10vh);
+  visibility: hidden;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  transition-delay: 1s;
+  will-change: opacity, visibility;
+}
+
+.fade-in-section-x {
+  opacity: 0;
+  transform: translateX(-10vh);
+  visibility: hidden;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible, .fade-in-section-x.is-visible, .fade-in-bottom.is-visible, .fade-in-left.is-visible, .fade-in-right.is-visible, .ease-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.ease-in-section {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease-out;
+  will-change: opacity, visibility;
+}
+
+.section-background {
+  background: radial-gradient(closest-side,rgba(255,255,255,0.2),black 88%);
+  padding: 26px;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+
+.hero-tab {
+  margin-right: 20px;
+  color: rgba(255,255,255,0.54);
+}
+
+.hero-tab:hover{
+  cursor: pointer;
+}
+
+.active-tab {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.section-small {
+  margin-bottom: 24px;
+}
+
+.section-large {
+}
+
+.primary-section {
+  color: rgb(255,255,255);
+  padding: 26px;
+}
+
+.parallax-group {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
 .App-header {
@@ -28,11 +139,428 @@
   color: #61dafb;
 }
 
+.nft-img-side {
+  width: 85%;
+  box-shadow: 0px 2px 10px rgb(0,0,0);
+}
+
+.nft-img-front {
+  width: 120%;
+  box-shadow: 0px 2px 10px rgb(0,0,0);
+}
+
+.glow {
+  animation: glow 4s infinite linear;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0px 2px 16px rgb(119, 114, 103);
+  }
+  50% {
+    box-shadow: 0px 2px 28px wheat;
+  }
+  100% {
+    box-shadow: 0px 2px 16px rgb(119, 114, 103);
+  }
+}
+
+.divider {
+  width: 100%;
+  border: 1px solid wheat;
+}
+
+.utility-section, .utility-section-inverted {
+  text-align: left;
+  margin: 80px 0px;
+}
+
+.flex-grow {
+  flex: 1 1 33%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-align-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-just-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-just-even {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-just-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-just-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-just-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-align-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.spacing-medium {
+  padding: 120px 0px;
+}
+
+.spacing-medium-bot {
+  padding: 16px 0px 0px 0px;
+}
+
+.video-container {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 120px;
+  box-shadow: 0px -8px 14px black;
+}
+
+.float {
+  animation: float 4s infinite linear;
+}
+
+.float-slow {
+  animation: float 8s infinite ease-in-out;
+}
+
+.float-medium {
+  animation: float 6s infinite linear;
+}
+
+.float-small {
+  animation: float-small 4s infinite ease-in-out;
+}
+
+.float-small-delayed {
+  animation: float-small 4s infinite ease-in-out;
+  animation-delay: 1s;
+}
+
+.MuiTouchRipple-rippleVisible {
+  color: rgb(245,222,179) !important;
+  animation-duration: 1500ms !important;
+}
+
+.fade-in-slow {
+  animation: fade-in-slow 2s ease-in;
+}
+
+.hit-marker-container {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+}
+
+.hit-marker-container-left {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+}
+
+.hit-marker-container-right {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+}
+
+.stats-container-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stats-container-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.block-icon {
+  color: white !important;
+  font-size: 40px !important;
+}
+
+.marker-visible {
+  animation: hit-marker 1.25s ease-in;
+}
+
+.game-log {
+  width: 100%;
+  height: 150px;
+  border: none;
+  color: white;
+  background: transparent;
+}
+
+.shake {
+  animation: shake 0.05s linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(12px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes hit-marker {
+  0% {
+    opacity: 100%;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0%;
+    transform: translateY(-75px);
+  }
+}
+
+@keyframes fade-in-slow {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float-small {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.rotate {
+  animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.nft-img-container {
+  margin: 16px 0px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .primary-section {
+    padding: 26px 160px;
+  }
+
+  .faq-container {
+    padding: 100px;
+  }
+
+  .utility-section {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+  }
+
+  .utility-section-inverted {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+    flex-direction: row-reverse;
+  }
+
+  .utility-left {
+    width: 60%;
+  }
+
+  .utility-right {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+
+  .primary-section {
+    padding: 26px 100px;
+  }
+
+  .utility-section {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+  }
+
+  .utility-section-inverted {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+    flex-direction: row-reverse;
+  }
+
+  .utility-left {
+    width: 60%;
+  }
+
+  .utility-right {
+    width: 40%;
+  }
+
+  .faq-container {
+    padding: 60px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 925px){
+
+  .primary-section {
+    padding: 26px 100px;
+  }
+
+  .faq-container {
+    padding: 50px;
+  }
+
+  .utility-section {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+  }
+
+  .utility-section-inverted {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+    flex-direction: row-reverse;
+  }
+
+  .utility-left {
+    width: 60%;
+  }
+
+  .utility-right {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 925px) and (max-width: 1024px) {
+  .primary-section {
+    padding: 26px 100px;
+  }
+
+  .utility-section {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+  }
+
+  .utility-section-inverted {
+    display: flex;
+    align-items: center;
+    margin: 148px 0px;
+    flex-direction: row-reverse;
+  }
+
+  .utility-left {
+    width: 60%;
+  }
+
+  .utility-right {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 615px) and (max-width: 925px) {
+  .flex-grow {
+    flex: 1 1 50%;
+  }
+
+  .video-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .flex-grow {
+    flex: 1 1 100%;
+  }
+
+  .spacing-medium {
+    padding: 120px 10px;
+  }
+
+  .video-container {
+    width: 100%;
   }
 }

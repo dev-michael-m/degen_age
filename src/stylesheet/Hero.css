@@ -1,0 +1,9 @@
+.hero-header {
+    width: fit-content;
+    margin: auto;
+    background: black;
+    position: relative;
+    bottom: 16px;
+    padding: 0px 60px;
+    color: cyan;
+}
