@@ -2,7 +2,7 @@ import React from 'react';
 import '../stylesheet/Card.css';
 import Button from '@mui/material/Button';
 import { FormatNumber } from '../utilities/util';
-import Logo from '../assets/degen age vector black.jpg';
+import Logo from '../assets/degen age logo BNW.jpg';
 
 const ItemCard = ({children, price = "", amount = "", bestValue = false, selected = false, color = ""}) => {
     return (

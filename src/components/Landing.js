@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import Logo from '../assets/degen age vector black.jpg';
+import Logo from '../assets/degen age logo BNW.jpg';
 import '../stylesheet/Landing.css';
 
 const Landing = () => {
@@ -21,9 +21,9 @@ const Landing = () => {
     return (
       <div className="landing-page" id="landing-page">
         <div className='landing-wrapper'>
-          <div style={{position: 'relative'}}>
+          <div style={{position: 'relative',margin: 40}}>
             <div style={{zIndex: 10}}>
-              <img src={Logo} width="200px"></img>
+              <img src={Logo} width={200} height={200}></img>
             </div>
             <div className='bubble'></div>
           </div>
