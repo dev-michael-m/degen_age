@@ -1,0 +1,22 @@
+.select-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.select-main {
+    height: 100%;
+}
+
+.sub-select-wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.select-cards {
+    display: flex;
+    padding: 20px;
+}

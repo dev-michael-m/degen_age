@@ -10,6 +10,47 @@
     opacity: 0.82;
 }
 
+.item-card.faction {
+    background-color: rgba(255,255,255,0.1);
+    opacity: 0.2;
+}
+
+.item-card.faction:hover {
+    cursor: pointer;
+    opacity: 1;
+    transform: scale(1.05);
+    transition: 1s;
+}
+
+.f1 {
+    border: 2px solid bisque;
+    box-shadow: 0px 0px 30px mediumpurple;
+    background-image: url('../assets/knight.png');
+    background-position: center;
+    background-size: cover;
+}
+.f2 {
+    border: 2px solid bisque;
+    box-shadow: 0px 0px 30px rgb(69, 58, 217);
+    background-image: url('../assets/knight.png');
+    background-position: center;
+    background-size: cover;
+}
+.f3 {
+    border: 2px solid bisque;
+    box-shadow: 0px 0px 30px rgb(206, 50, 50);
+    background-image: url('../assets/knight.png');
+    background-position: center;
+    background-size: cover;
+}
+.f4 {
+    border: 2px solid bisque;
+    box-shadow: 0px 0px 30px rgb(46, 219, 37);
+    background-image: url('../assets/knight.png');
+    background-position: center;
+    background-size: cover;
+}
+
 .card-wrapper {
     padding: 10px;
     display: flex;

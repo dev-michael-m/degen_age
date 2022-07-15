@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import HomeScreen from './components/HomeScreen';
 import Landing from './components/Landing';
 import MarketPlace from './components/MarketPlace';
+import Selection from './components/Selection';
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,9 +17,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        {/* <Route path="/play/battle" element={<App />} />
+        <Route path="/play/battle" element={<App />} />
         <Route exact path="/play" element={<HomeScreen />} />
-        <Route exact path="/marketplace" element={<MarketPlace />} /> */}
+        <Route exact path="/marketplace" element={<MarketPlace />} />
+        <Route exact path="/select" element={<Selection />} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </Router>    

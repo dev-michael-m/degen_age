@@ -13,8 +13,20 @@
     background-color: rgba(0,0,0,0.90);
 }
 
-.top-bar-label {
+.top-bar-label-cp {
     color: whitesmoke !important;
+}
+
+.top-bar-label-sch {
+    color: whitesmoke !important;
+}
+
+.label-green {
+    color: lightgreen !important;
+}
+
+.label-orange {
+    color: orange !important;
 }
 
 .home-container {
@@ -25,6 +37,39 @@
 .home-inner-container {
     height: 100%;
     width: 100%;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 62%;
+    width: 210px;
+}
+
+.drawer-link {
+    color: white;
+    text-decoration: none;
+}
+
+.disabled-link {
+    color: dimgray;
+}
+
+.side-nav-wrapper {
+    color: whitesmoke;
+}
+
+.side-nav-wrapper a:hover {
+    color: #e8de89;
+    transition: 0.25s ease;
+}
+
+.menu-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .home-container.ELVES {
