@@ -28,7 +28,7 @@ const Landing = () => {
             <div className='bubble'></div>
           </div>
           <div className='typewriter'>
-            <h2>Are you ready?</h2>
+            <h2>EAP Minting August 12th!</h2>
           </div>
         </div>
       </div>
