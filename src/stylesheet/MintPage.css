@@ -1,0 +1,12 @@
+.mint-container {
+    height: 100%;
+}
+
+.mint-wrapper {
+    height: 100%;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}

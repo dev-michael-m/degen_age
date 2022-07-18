@@ -53,8 +53,11 @@
     ]
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.3",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-etherscan": "^2.1.7",
+    "chai": "^4.3.6",
     "ethers": "^5.0.0",
     "hardhat": "^2.6.8"
   }

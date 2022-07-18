@@ -12,6 +12,8 @@ import {
   Route
 } from 'react-router-dom';
 
+import MintPage from './components/MintPage';
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -19,6 +21,7 @@ ReactDOM.render(
         {/* <Route path="/play/battle" element={<App />} />
         <Route exact path="/play" element={<HomeScreen />} />
         <Route exact path="/marketplace" element={<MarketPlace />} /> */}
+        <Route exact path="/mint" element={<MintPage />} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </Router>    

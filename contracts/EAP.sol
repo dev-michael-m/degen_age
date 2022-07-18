@@ -15,11 +15,11 @@ contract EAP is ERC721A, Ownable {
 
     uint256 public MAX_SUPPLY = 3000;
     uint256 public MAX_BATCH = 5;
-    uint256 public SALE_PRICE = 0.0175 ether;
+    uint256 public SALE_PRICE = 0.008 ether;
     uint256 public GIVEAWAYS = 15;
     uint16 public sale_state;
     bool public paused;
-    string public BASE_URL;
+    string public BASE_URL = "ipfs://QmRNnsqaP2qASYWVybUGnQhnXT3qrwZU6RopsvSTXc6khz/unrevealed.json";
     bytes32 public EXTENSION = ".json";
     bool public revealed;
     address public PRIMARY;
@@ -38,7 +38,7 @@ contract EAP is ERC721A, Ownable {
     function pubMint(uint256 quantity) public payable
     {
         require(!paused);
-        require(totalSupply() < MAX_SUPPLY, "All passes have been minted");
+        require(totalSupply() + quantity <= MAX_SUPPLY, "All passes have been minted");
         require(sale_state == 2, "Sale is currently inactive");
         require(msg.value == SALE_PRICE * quantity, "Incorrect amount of Ether");
         require(tx.origin == msg.sender, "Contracts are not allowed to mint");
@@ -54,7 +54,7 @@ contract EAP is ERC721A, Ownable {
     function presale(bytes calldata _signature, uint256 quantity) public payable
     {
         require(!paused);
-        require(totalSupply() < MAX_SUPPLY, "All passes have been minted");
+        require(totalSupply() + quantity <= MAX_SUPPLY, "All passes have been minted");
         require(sale_state == 1, "Sale is currently inactive");
         require(isWhitelisted(_signature, msg.sender), "User is not whitelisted");
         require(msg.value == SALE_PRICE * quantity, "Incorrect amount of Ether");
@@ -64,7 +64,7 @@ contract EAP is ERC721A, Ownable {
         _safeMint(msg.sender, quantity);
     }
 
-    function devMint(uint256 quantity) public payable onlyOwner {
+    function devMint(uint256 quantity) public onlyOwner {
         require(!paused);
         require(msg.sender == PRIMARY, "Address is not allowed to mint.");
         require(quantity % MAX_BATCH == 0, "Can only mint a multiple of MAX_BATCH");

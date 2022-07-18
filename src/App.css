@@ -233,6 +233,39 @@
   align-items: flex-start;
 }
 
+.white-btn {
+  background-color: whitesmoke !important;
+  color: rgb(0,0,0) !important;
+  border-radius: 20px !important;
+}
+
+.white-btn:hover {
+  color: whitesmoke !important;
+  background-color: rgba(255,255,255,0.52) !important;
+  transition: 0.25s ease;
+}
+
+.input-light input {
+  width: 40px !important;
+  text-align: center;
+  background-color: rgba(255,255,255,0.22) !important;
+  border-radius: 20px !important;
+  color: wheat !important;
+  -webkit-text-fill-color: wheat !important;
+}
+
+.black-btn {
+  color: rgb(0,0,0) !important;
+}
+
+.lightgray-bg {
+  background-color: rgba(255,255,255,0.22) !important;
+}
+
+.white-bg {
+  background-color: whitesmoke !important;
+}
+
 .text-left {
   text-align: left;
 }
