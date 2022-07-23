@@ -22,11 +22,17 @@ contract EAP is ERC721A, Ownable {
     string public BASE_URL = "ipfs://QmRNnsqaP2qASYWVybUGnQhnXT3qrwZU6RopsvSTXc6khz/unrevealed.json";
     bytes32 public EXTENSION = ".json";
     bool public revealed;
-    address public PRIMARY;
+    address public PRIMARY = 0x182B80929672984a64d3d756588C7b3c217f0182;
     address public PUB_KEY;
+    mapping(address => bool) private admins;
     
     constructor() ERC721A("Degen Age Early Adopters Pass", "EAP", MAX_BATCH, MAX_SUPPLY) {
-        PRIMARY = msg.sender;
+        addAdmin(PRIMARY);
+    }
+
+    modifier adminOnly {
+        require(admins[msg.sender]);
+        _;
     }
 
     /* PUBLIC METHODS */
@@ -64,7 +70,9 @@ contract EAP is ERC721A, Ownable {
         _safeMint(msg.sender, quantity);
     }
 
-    function devMint(uint256 quantity) public onlyOwner {
+    // Need to change this function
+    // Address must be admin and PRIMARY address
+    function devMint(uint256 quantity) public adminOnly {
         require(!paused);
         require(msg.sender == PRIMARY, "Address is not allowed to mint.");
         require(quantity % MAX_BATCH == 0, "Can only mint a multiple of MAX_BATCH");
@@ -74,6 +82,16 @@ contract EAP is ERC721A, Ownable {
         for(uint256 i = 0; i < numBatch; i++){
             _safeMint(msg.sender, MAX_BATCH);
         }
+    }
+
+    function addAdmin(address _account) public adminOnly {
+        require(!admins[_account],"Admin already exists");
+        admins[_account] = true;
+    }
+
+    function removeAdmin(address _account) public adminOnly {
+        require(admins[_account],"Admin does not exist");
+        admins[_account] = false;
     }
 
     /* OVERRIDES */
@@ -100,11 +118,11 @@ contract EAP is ERC721A, Ownable {
 
     /* PRIVATE METHODS */
 
-    function setPrimaryAddress(address _primary) public onlyOwner {
+    function setPrimaryAddress(address _primary) public adminOnly {
         PRIMARY = _primary;
     }
 
-    function setPublicKey(address _pubKey) public onlyOwner {
+    function setPublicKey(address _pubKey) public adminOnly {
         PUB_KEY = _pubKey;
     }
 
@@ -113,23 +131,23 @@ contract EAP is ERC721A, Ownable {
     * Requirements:
     * - `_sale_state` Must be an integer
     */
-    function setSaleState(uint16 _sale_state) public onlyOwner {
+    function setSaleState(uint16 _sale_state) public adminOnly {
         sale_state = _sale_state;
     }
 
     /*
     *   @dev Toggles paused state in case of emergency
     */
-    function togglePaused() public onlyOwner {
+    function togglePaused() public adminOnly {
         paused = !paused;
     }
 
-    function reveal(string memory _url) public onlyOwner {
+    function reveal(string memory _url) public adminOnly {
         BASE_URL = _url;
         revealed = true;
     }
 
-    function setSalePrice(uint256 _price) public onlyOwner {
+    function setSalePrice(uint256 _price) public adminOnly {
         SALE_PRICE = _price;
     }
 
@@ -138,13 +156,13 @@ contract EAP is ERC721A, Ownable {
     * Requirements:
     * - `_url` Must be in the form: ipfs://${CID}/
     */
-    function setBaseURL(string memory _url) public onlyOwner {
+    function setBaseURL(string memory _url) public adminOnly {
         BASE_URL = _url;
     }
 
     // used in case someone enters a payable amount
     // for the free mint so they may be refunded
-    function withdraw() public payable onlyOwner {
+    function withdraw() public payable adminOnly {
         (bool os,)= payable(PRIMARY).call{value:address(this).balance}("");
         require(os);
     }

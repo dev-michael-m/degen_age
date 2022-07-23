@@ -5,6 +5,8 @@ require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
+const ETHK = "EMHUGWS93AQHJME3JBBABZ3HI4FSHF6TR3";
+
 module.exports = {
    solidity: {
       version: "0.8.1",
@@ -19,11 +21,11 @@ module.exports = {
    networks: {
       hardhat: {},
       rinkeby: {
-         url: process.env.API_URL,
-         accounts: [`0x${process.env.REACT_APP_PRIVATE_KEY}`]
+         url: process.env.ALKU,
+         accounts: [`0x${process.env.REACT_APP_KRP}`]
       }
    },
    etherscan: {
-      apiKey: process.env.ETHERSCAN_API
+      apiKey: ETHK
    }
 }

@@ -2,11 +2,11 @@ const {ethers} = require('ethers');
 const {whitelist} = require('../whitelist.json');
 
 require('dotenv').config();
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
-const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
+const _alkk = process.env.REACT_APP_ALKK;
+const _krp = process.env.REACT_APP_KRP;
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(alchemyKey);
+const web3 = createAlchemyWeb3(_alkk);
 const contractABI = require('../contract-abi.json');
 
 const DECIMALS = 3;
@@ -58,10 +58,12 @@ export const Mint = async (_num, _address) => {
 
                 if(_saleState == 1){
                     const exists = whitelist.find(doc => doc.toUpperCase() == _address.toUpperCase());   // check address is on wl
-
+                    console.log({whitelist});
+                    console.log({_address});
+                    console.log({exists});
                     if(exists){
                         const message = web3.eth.abi.encodeParameters(["address","uint256"],[_address,max_supply]);
-                        const {signature} = web3.eth.accounts.sign(message,PRIVATE_KEY);
+                        const {signature} = web3.eth.accounts.sign(message,_krp);
                        
                         const tx = {
                             from: _address,
