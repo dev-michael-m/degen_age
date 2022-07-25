@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { CHAR_RACES } from '../constants';
+import { CHAR_RACES, LVLS } from '../constants';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Apps';
 import IconButton from '@mui/material/IconButton';
@@ -10,19 +10,28 @@ import CloseIcon from '@mui/icons-material/Close';
 import CPIcon from '@mui/icons-material/Api';
 import SchillIcon from '../assets/schil token logo.png';
 import BattleIcon from '../assets/swords.png';
-import Logo from '../assets/degen age title GNW.png';
+import Logo from '../assets/degen age title GNW skull.png';
+import NFT1 from '../assets/knight.png';
+import NFT2 from '../assets/knight 2.jpg';
+import Button from '@mui/material/Button';
 import '../stylesheet/Home.css';
 import { useLocation } from 'react-router-dom';
-import { FormatNumber } from './../utilities/util';
+import { FormatNumber, getColorLvl } from './../utilities/util';
 
 const HomeScreen = () => {
     const {state} = useLocation();
+    const [headerMsg,setHeaderMsg] = useState(`
+        Welcome to Degen Age! The metaverse's first online NFT game...
+    `)
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [account,setAccount] = useState({
         address: null,
         cp: 100,
         schill: 99999,
-        race: state.faction
+        race: state.faction,
+        selected: {
+            lvl: 256
+        }
     })
 
     const onDrawerToggle = () => {
@@ -75,6 +84,9 @@ const HomeScreen = () => {
                                 <MenuIcon style={{color: 'whitesmoke', transform: 'rotate(45deg)'}} />
                             </IconButton>
                         </div>
+                        <div>
+                            <p className='header-msg'>{headerMsg}</p>
+                        </div>
                         <div className='flex-just-even' style={{width: 250}}>
                             <div style={{marginRight: 28, width: 80}} id="campaign-points" className='flex-just-even flex-align-center'>
                                 <CPIcon style={{color: 'floralwhite', fontSize: 18, marginRight: 8}} />
@@ -86,7 +98,25 @@ const HomeScreen = () => {
                             </div>
                         </div>
                     </div>                    
-                </div>                
+                </div> 
+                <div className='home-primary-container'>
+                    <div className='home-primary-wrapper'>
+                        <div>
+                            <h2 style={{color: getColorLvl(account.selected.lvl)}}>(Lvl. {account.selected.lvl})</h2>
+                        </div>
+                        <div className='img-border'>
+                            <img src={NFT1} width={400}></img>                       
+                        </div> 
+                        <div className='spacing-small'>
+                            <Button className='primary-white' variant="contained">
+                                <div className='flex-align-center'>
+                                    <img style={{marginRight: 12}} src={BattleIcon} width={20}></img>
+                                    <label>Battle!</label>
+                                </div>
+                            </Button>
+                        </div>   
+                    </div>
+                </div>               
             </div>
         </div>
     )

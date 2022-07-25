@@ -1,7 +1,7 @@
 import Card from './Card';
 import React, {useState, useEffect} from 'react';
 import '../stylesheet/Selection.css';
-import Logo from '../assets/degen age title GNW.png';
+import Logo from '../assets/degen age title GNW skull.png';
 import KnightTitle from '../assets/knights title.png';
 import GoblinTitle from '../assets/goblins title.png';
 import WizardTitle from '../assets/wizards title.png';

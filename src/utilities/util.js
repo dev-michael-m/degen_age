@@ -1,4 +1,5 @@
 import {ethers} from 'ethers';
+import {LVLS} from '../constants';
 
 export const FormatNumber = (_num) => {
     const _parsed = parseInt(_num);
@@ -54,4 +55,17 @@ export const MaskAddress = (full_address = '') => {
     } catch (error) {
         console.error(error);
     }
+}
+
+export const getColorLvl = (_lvl) => {
+    let _color = LVLS[0].color
+
+    for(let i = 0; i < LVLS.length; i++){
+        if(_lvl >= LVLS[i].min && _lvl <= LVLS[i].max){
+            _color = LVLS[i].color;
+            break;
+        }
+    }
+
+    return _color;
 }

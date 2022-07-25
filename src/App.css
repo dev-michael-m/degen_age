@@ -245,6 +245,10 @@
   padding: 120px 0px;
 }
 
+.spacing-small {
+  padding: 20px;
+}
+
 .spacing-medium-bot {
   padding: 16px 0px 0px 0px;
 }
