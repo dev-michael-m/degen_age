@@ -194,6 +194,11 @@
   justify-content: space-between;
 }
 
+.flex-just-around {
+  display: flex;
+  justify-content: space-around;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -247,6 +252,14 @@
 
 .spacing-medium-bot {
   padding: 16px 0px 0px 0px;
+}
+
+.spacing-small {
+  padding: 45px;
+}
+
+.spacing-vsmall {
+  padding: 26px;
 }
 
 .video-container {
@@ -323,6 +336,17 @@
 
 .marker-visible {
   animation: hit-marker 1.25s ease-in;
+}
+
+.primary-white {
+  background-color: rgb(255,255,255) !important;
+  color: rgb(0,0,0) !important;
+  border-radius: 22px !important;
+}
+
+.primary-white:hover {
+  background-color: rgba(255,255,255,0.84) !important;
+  box-shadow: 0px 0px 10px rgb(255, 255, 255) !important;
 }
 
 .game-log {

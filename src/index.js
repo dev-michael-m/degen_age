@@ -11,6 +11,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import LorePage from './components/LorePage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
         {/* <Route path="/play/battle" element={<App />} />
         <Route exact path="/play" element={<HomeScreen />} />
         <Route exact path="/marketplace" element={<MarketPlace />} /> */}
+        <Route path="/lore/:id" element={<LorePage />} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </Router>    
