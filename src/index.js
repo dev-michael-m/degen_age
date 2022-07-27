@@ -12,6 +12,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import WarRoom from './components/WarRoom';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/play/battle" element={<App />} />
         <Route exact path="/play" element={<HomeScreen />} />
+        <Route exact path="/warroom" element={<WarRoom />} />
         <Route exact path="/marketplace" element={<MarketPlace />} />
         <Route exact path="/select" element={<Selection />} />
         <Route exact path="/" element={<Landing />} />

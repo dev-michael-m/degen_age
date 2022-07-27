@@ -6,7 +6,6 @@ import KnightTitle from '../assets/knights title.png';
 import GoblinTitle from '../assets/goblins title.png';
 import WizardTitle from '../assets/wizards title.png';
 import ElfTitle from '../assets/elves title.png';
-import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
 import {CHAR_RACES} from '../constants';
 

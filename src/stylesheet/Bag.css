@@ -1,0 +1,54 @@
+.item-bag.row td {
+    width: 60px;
+    height: 60px;
+    border: 2px solid gold;
+    background-color: rgba(0,0,0,0.72);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-bag.col td {
+    width: 60px;
+    height: 60px;
+    border: 2px solid gold;
+    background-color: rgba(0,0,0,0.72);
+    display: table-cell;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-bag .item-wrapper:active {
+    cursor: grabbing;
+}
+
+.item-bag tr:hover {
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.92);
+    transition: 0.25s ease;
+}
+
+.item-bag .item-img:hover {
+    transform: scale(1.25);
+    transition: 0.5s ease;
+}
+
+.item-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-counter {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    font-size: 11px;
+    color: rgba(255,255,255);
+}

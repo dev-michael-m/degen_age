@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { CHAR_RACES, LVLS } from '../constants';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Apps';
@@ -10,16 +10,47 @@ import CloseIcon from '@mui/icons-material/Close';
 import CPIcon from '@mui/icons-material/Api';
 import SchillIcon from '../assets/schil token logo.png';
 import BattleIcon from '../assets/swords.png';
+import AntiFire from '../assets/anti fire potion bottle.png';
+import AntiPoison from '../assets/anti poison potion bottle.png';
+import AntiShade from '../assets/anti shade potion bottle.png';
+import Health from '../assets/health potion bottle.png';
 import Logo from '../assets/degen age title GNW skull.png';
 import NFT1 from '../assets/knight.png';
 import NFT2 from '../assets/knight 2.jpg';
 import Button from '@mui/material/Button';
+import '../stylesheet/Bag.css';
 import '../stylesheet/Home.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FormatNumber, getColorLvl } from './../utilities/util';
+import Items from './Items';
+
+const $ = require('jquery');
+require('jquery-ui');
+require('jquery-ui/ui/widgets/sortable');
+
+const ITEMS = [
+    {
+        count: 1,
+        img: Health
+    },
+    {
+        count: 2,
+        img: AntiPoison
+    },
+    {
+        count: 1,
+        img: AntiFire
+    },
+    {
+        count: 3,
+        img: AntiShade
+    }
+]
 
 const HomeScreen = () => {
     const {state} = useLocation();
+    const navigate = useNavigate();
+
     const [headerMsg,setHeaderMsg] = useState(`
         Welcome to Degen Age! The metaverse's first online NFT game...
     `)
@@ -34,8 +65,26 @@ const HomeScreen = () => {
         }
     })
 
+    useEffect(() => {
+        let mounted = true;
+
+        if(mounted){
+            window.onload = () => {
+                $('tbody').sortable();
+            }
+        }
+
+        return () => {
+            mounted = false;
+        }
+    },[]);
+
     const onDrawerToggle = () => {
         setDrawerOpen(prevState => !prevState);
+    }
+
+    const handleBattle = () => {
+        navigate('/warroom');
     }
 
     return (
@@ -60,7 +109,7 @@ const HomeScreen = () => {
                         <div className="menu-list">                            
                             <div style={{width: '80%'}} className='flex-align-center side-nav-wrapper'>
                                 <img style={{marginRight: 20, filter: 'brightness(0) invert(1)'}} src={BattleIcon} width={32}></img>
-                                <a className='drawer-link' id="artist" href="#">Battle!</a>
+                                <a className='drawer-link' id="artist" href="#" onClick={handleBattle}>Battle!</a>
                             </div>
                             <div style={{width: '80%'}} className='flex-align-center side-nav-wrapper'>
                                 <AccountIcon style={{marginRight: 20}} />
@@ -101,20 +150,23 @@ const HomeScreen = () => {
                 </div> 
                 <div className='home-primary-container'>
                     <div className='home-primary-wrapper'>
-                        <div>
-                            <h2 style={{color: getColorLvl(account.selected.lvl)}}>(Lvl. {account.selected.lvl})</h2>
+                        <div className='flex-column flex-align-center'>
+                            <div>
+                                <h2 style={{color: getColorLvl(account.selected.lvl)}}>(Lvl. {account.selected.lvl})</h2>
+                            </div>
+                            <div className='img-border'>
+                                <img src={NFT1} width={400}></img>                       
+                            </div> 
+                            <div className='spacing-small'>
+                                <Button className='primary-white' variant="contained" onClick={handleBattle}>
+                                    <div className='flex-align-center'>
+                                        <img style={{marginRight: 12}} src={BattleIcon} width={20}></img>
+                                        Battle!
+                                    </div>
+                                </Button>
+                            </div>   
                         </div>
-                        <div className='img-border'>
-                            <img src={NFT1} width={400}></img>                       
-                        </div> 
-                        <div className='spacing-small'>
-                            <Button className='primary-white' variant="contained">
-                                <div className='flex-align-center'>
-                                    <img style={{marginRight: 12}} src={BattleIcon} width={20}></img>
-                                    <label>Battle!</label>
-                                </div>
-                            </Button>
-                        </div>   
+                        <Items items={ITEMS} layout="row" />
                     </div>
                 </div>               
             </div>

@@ -39,14 +39,14 @@
 .f3 {
     border: 2px solid bisque;
     box-shadow: 0px 0px 30px rgb(206, 50, 50);
-    background-image: url('../assets/knight.png');
+    background-image: url('../assets/knight 2.jpg');
     background-position: center;
     background-size: cover;
 }
 .f4 {
     border: 2px solid bisque;
     box-shadow: 0px 0px 30px rgb(46, 219, 37);
-    background-image: url('../assets/knight.png');
+    background-image: url('../assets/knight 2.jpg');
     background-position: center;
     background-size: cover;
 }
