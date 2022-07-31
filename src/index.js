@@ -13,12 +13,13 @@ import {
   Route
 } from 'react-router-dom';
 import WarRoom from './components/WarRoom';
+import Game from './components/Game';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/play/battle" element={<App />} />
+        <Route path="/play/battle/:id" element={<Game />} />
         <Route exact path="/play" element={<HomeScreen />} />
         <Route exact path="/warroom" element={<WarRoom />} />
         <Route exact path="/marketplace" element={<MarketPlace />} />

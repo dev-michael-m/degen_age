@@ -1,7 +1,7 @@
-import Elf from '../assets/elf-asset-v2.png';
-import Goblin from '../assets/goblin-asset-v2.png';
-import Knight from '../assets/knight-asset-v2.png';
-import Wizard from '../assets/wizard-asset-v2.png';
+import Elf from '../assets/knight 3.png';
+import Goblin from '../assets/knight.png';
+import Knight from '../assets/knight 2.jpg';
+import Wizard from '../assets/knight 4.png';
 
 const TYPES = {
     MAGIC: {val: 40, name: 'magic', adv: 'MELEE', general: 'MAGIC'},
@@ -101,19 +101,23 @@ const hitMarkerVisible = (_player, _hit) => {
     if(!_hit){
       document.getElementById('p1-block').style.display = 'block';
     }else{
-      document.getElementById('hit-marker-p1').textContent = `-${_hit}`
+      document.getElementById('hit-marker-p1').textContent = `-${_hit}`;
       _hit >= 35 ? document.getElementById('hit-marker-p1').style.color = 'orange' : document.getElementById('hit-marker-p1').style.color = 'red';
+      document.getElementById('p1-slash').className += 'slash';
       document.getElementById('hit-marker-p1').className += 'marker-visible';
-      document.getElementById('p1-image').className += 'shake';
+      document.getElementById('p1-img-wrapper').className += 'shake';
     }    
   }else{
+    console.log({_player,_hit});
     if(!_hit){
       document.getElementById('p2-block').style.display = 'block';
     }else{
-      document.getElementById('hit-marker-p2').textContent = `-${_hit}`
+      console.log('placing hit markers');
+      document.getElementById('hit-marker-p2').textContent = `-${_hit}`;
       _hit >= 35 ? document.getElementById('hit-marker-p2').style.color = 'orange' : document.getElementById('hit-marker-p2').style.color = 'red';
+      document.getElementById('p2-slash').className += 'slash';
       document.getElementById('hit-marker-p2').className += 'marker-visible';
-      document.getElementById('p2-image').className += 'shake';
+      document.getElementById('p2-img-wrapper').className += 'shake';
     }
   }
 }
@@ -127,14 +131,16 @@ const resetHitMarker = (_player) => {
     setTimeout(() => {
       if(_player == 1){
         document.getElementById('hit-marker-p1').className = '';
-        document.getElementById('p1-image').className = '';
+        document.getElementById('p1-img-wrapper').className = '';
         document.getElementById('hit-marker-p1').textContent = '';
         document.getElementById('p1-block').style.display = 'none';
+        document.getElementById('p1-slash').className = '';
       }else {
         document.getElementById('hit-marker-p2').textContent = '';
-        document.getElementById('p2-image').className = '';
+        document.getElementById('p2-img-wrapper').className = '';
         document.getElementById('hit-marker-p2').className = '';
         document.getElementById('p2-block').style.display = 'none';
+        document.getElementById('p2-slash').className = '';
       }
   
       resolve(true);

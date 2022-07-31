@@ -49,9 +49,7 @@ const Selection = () => {
                 </div>
             </div> :
             <div className='fade-in-slow sub-select-wrapper flex-just-center'>
-                <div>
-                    <img src={Logo} width={500}></img>
-                </div>
+                <div className='cracked'></div>
             </div>            
             }
         </div>

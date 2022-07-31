@@ -179,6 +179,11 @@
   flex: 1 1 33%;
 }
 
+.flex-just-around {
+  display: flex;
+  justify-content: space-around;
+}
+
 .flex {
   display: flex;
 }
@@ -281,6 +286,54 @@
   animation-delay: 1s;
 }
 
+.cracked {  
+  position: relative;
+  width: 500px;
+  height: 500px;
+  perspective: 100vw;
+}
+
+.cracked::before, .cracked::after {
+  content: '';
+  position: absolute;
+  background-image: url('./assets/degen age title GNW skull.png');
+  background-position: center;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.cracked::before {
+  clip-path: polygon(26% 0, 76% 100%, 0 100%, 0 0);
+  z-index: 1;
+  animation: 
+    square-left 6s cubic-bezier(0.165, 0.84, 0.44, 1) infinite,
+    fade-out 6s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+}
+
+.cracked::after {
+  clip-path: polygon(100% 0, 100% 100%, 75% 100%, 25% 0);
+  z-index: 6;
+  animation:
+    square-right 6s cubic-bezier(0.165, 0.84, 0.44, 1) infinite,
+    fade-out 6s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+}
+
+@keyframes square-left {
+  26% { transform: translateX(0); }
+  100% { transform: translate(-5%, -5%) rotate(-1deg); }
+}
+
+@keyframes square-right {
+  26% { transform: translateX(0); }
+  100% { transform: translate(5%, 5%) rotate(2deg); }
+}
+
+@keyframes fade-out {
+  88% { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+
 .MuiTouchRipple-rippleVisible {
   color: rgb(245,222,179) !important;
   animation-duration: 1500ms !important;
@@ -305,12 +358,28 @@
   position: absolute;
   top: 30%;
   left: 25%;
+  z-index: 100;
+}
+
+.slash-wrapper, .defeat-wrapper {
+  position: absolute;
+  top: 50%;
+  z-index: 100;
+}
+
+.defeat-wrapper h2 {
+  display: none;
+  color: red;
+  font-size: 100px;
+  margin: 0;
+  transform: rotate(-45deg);
 }
 
 .hit-marker-container-right {
   position: absolute;
   top: 30%;
   right: 25%;
+  z-index: 100;
 }
 
 .stats-container-left {
@@ -360,12 +429,15 @@
 @keyframes shake {
   0% {
     transform: translateX(0px);
+    opacity: 1;
   }
   50% {
     transform: translateX(12px);
+    opacity: 0.5;
   }
   100% {
     transform: translateX(0px);
+    opacity: 1;
   }
 }
 
