@@ -30,14 +30,14 @@ const LorePage = () => {
     }
 
     const navigateNext = () => {
-        navigate(`/lore/${id+1}`);
+        navigate(`/lore/${parseInt(id)+1}`);
     }
 
     return (
         <div className="lore-wrapper">
             <h1 className='text-center'>{LORE[id].title}</h1>
             <div className='flex-just-center spacing-small'>
-                <img src={LORE[id].img} width="90%"></img>
+                <img src={LORE[id].img} width={LORE[id].size ? LORE[id].size : '90%'}></img>
             </div>
             <p>{LORE[id].text}</p>
             <div className='flex-just-center spacing-small'>

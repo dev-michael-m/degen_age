@@ -1,9 +1,10 @@
 import CrystalImg from './assets/crystal cavern full.jpg';
+import BookImg from './assets/books promo.png';
 
 export const LORE = [
   {
     path: "origins",
-    title: `Vol. I - The Origin Story`,
+    title: `Chapt. I - The Origin Story`,
     img: CrystalImg,
     text: `Eons ago, Elves, Knights, Wizards, and Goblins all thrived together within the metaverse. All was great until the Mighty Storm of the Brakkens. Nasty creatures the Brakkens were. Some say the Brakkens were constructed to bring destruction among the four factions.
 
@@ -52,4 +53,34 @@ After taking some time to rest, he decided to rush down to the bottom of the cit
 This is where our story begins…
     `,
   },
+  {
+    path: "prophecy",
+    title: `Chapt. II - A Prophecy Untold`,
+    img: BookImg,
+    size: '50%',
+    text: `The lost lands of Brakkaria were only a myth until the Brakkens resurfaced. A mystical land that contained many riches and power. A sacred place created from floating islands in the sky. A beautiful civilization with no care in the world. 
+
+All was great in Brakkaria until greed flooded the lands. Many leaders from far away lands wanted their power and riches for themselves. Destruction plagued Brakkaria until the leader of the Brakkarian army finally had enough. He brought down his mighty hammer, and took out the parasitic leaders one by one. 
+    
+Outraged by this invasive act, the Brakkarian leader invaded their rival's land, and took them by force. Brakkaria then grew ever larger. His dominance and brave leadership over these lands gave the residents more confidence and insurance over their leader's power.  Brakkaria was now thriving more than ever, and no one dared to tempt their might ever again. 
+    
+In the dungeon of one of the besieged strongholds, a man lay shackled inside a steel cage with some strange markings engraved on it.  The Brakkarian leader was told this man held knowledge to an ancient power, and that he must meet with him at once.  
+    
+As he approached the cage, a voice spoke, “It seems the prophecy has begun.  You will become a very powerful and mystic being”. 
+    
+The Brakkarian leader studied the man. 
+    
+“Prophecy? Mystic being? Who are you and why do you say such things?”, he said.
+    
+“I'm not from this plane of existence. I'm merely an ancient spectacle from a distant land.”, the man replied.
+    
+“The prophecy tells of one true leader.  One to rule them all.  No more war, just peace.”
+    
+“It says so in that book on the table over there.”, he said as he gestured towards a small wooden table in the corner of the dungeon.
+    
+The Brakkarian leader walked over and gingerly picked up the book. The title was faded and unreadable. He opened up the book and began to read. At that moment, the engraved symbols on the cage disappeared, and the prisoner's chains unlocked. 
+    
+“Ahh, that's better. Now let's discuss this prophecy.”      
+    `
+  }
 ];

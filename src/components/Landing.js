@@ -11,7 +11,8 @@ import '../stylesheet/Landing.css';
 import { useNavigate } from 'react-router-dom';
 
 const LORE_LIST = [
-  {display: 'Vol. I - The Origin Story', path: `origins`}
+  {display: 'Chapt. I - The Origin Story', path: `origins`},
+  {display: 'Chapt. II - A Prophecy Untold', path: `prophecy`}
 ]
 
 const Landing = () => {
