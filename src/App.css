@@ -416,10 +416,73 @@
 
 .game-log {
   width: 100%;
-  height: 150px;
+  height: 250px;
   border: none;
   color: white;
   background: transparent;
+  resize: none;
+}
+
+.log-wrapper {
+  position: relative;
+}
+
+.nft-container {
+  background-color: transparent;
+  width: 400px;
+  height: 400px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.nft-container:hover .nft-wrapper {
+  transform: rotateY(180deg);
+}
+
+.nft-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.card-back {
+  background-color: black;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.modal-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px black,
+}
+
+.fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, transparent, black);
+}
+
+.game-log::-webkit-scrollbar {
+  display: none;
 }
 
 .shake {

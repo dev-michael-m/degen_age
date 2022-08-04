@@ -5,6 +5,7 @@ import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 import ReadyIcon from '@mui/icons-material/ThumbUp';
 import LinearProgress from '@mui/material/LinearProgress';
 import HeartIcon from '@mui/icons-material/Favorite';
+import Modal from '@mui/material/Modal';
 import '../App.css';
 import '../stylesheet/Sections.css';
 import '../stylesheet/Game.css';
@@ -18,6 +19,7 @@ const Game = ({img,game_id}) => {
     const [loading,setLoading] = useState(true);
     const [collection,setCollection] = useState([]);
     const [ready,setReady] = useState(false);
+    const [modalOpen,setModalOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,6 +34,10 @@ const Game = ({img,game_id}) => {
         }
     },[]);
 
+    const toggleModal = () => {
+      setModalOpen(prevState => !prevState);
+    }
+
     const handleGameState = async () => {
         setGameState(true);
         setReady(true);
@@ -44,6 +50,8 @@ const Game = ({img,game_id}) => {
           }else{
             document.getElementById('p1-defeat').style.display = 'block';
           }
+
+          toggleModal();
         }    
       }
     
@@ -70,6 +78,12 @@ const Game = ({img,game_id}) => {
                 <CircularProgress />
               </div> :
               <div className='flex-align-center flex-just-between' id="game-board">
+                <Modal open={modalOpen} onClose={toggleModal} aria-labelledby={winner && winner == 1 ? 'You Won!' : 'You Lost'}>
+                  <div className='modal-wrapper'>
+                    <h2>Here is some text to display</h2>
+                    <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Leave</Button>
+                  </div>
+                </Modal>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
                   <div>
                     <h3 style={{color: 'gold'}}>{players.p1.race} (Lvl. {players.p1.overall})</h3>
@@ -90,7 +104,7 @@ const Game = ({img,game_id}) => {
                   </div>
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>
                     <LinearProgress style={{width: '75%'}} id="player1-health" variant='determinate' value={100} />
-                    <h3 id="player1-health-val">100</h3>
+                    <h3 style={{color: 'springgreen'}} id="player1-health-val">100</h3>
                   </div>  
                   {!ready ? <Button className='primary-white' variant="contained" onClick={handleGameState}>
                       <div className='flex-just-even flex-align-center' style={{width: 150}}>
@@ -100,8 +114,9 @@ const Game = ({img,game_id}) => {
                   </Button> : null}                                  
                 </div>
                 <div id="gameboard-middle" style={{width: '20%'}}>
-                  <div>
+                  <div className='log-wrapper'>
                     <textarea className='game-log' id="game-log"></textarea>
+                    <div className='fade-overlay'></div>
                   </div>
                   <div className='flex-column flex-just-even flex-align-center'>
                     <h2>{winner === 1 ? `You Won!` : winner === 0 ? `Defeat!` : ""}</h2>
@@ -127,7 +142,7 @@ const Game = ({img,game_id}) => {
                     </div>                    
                   </div>
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>
-                    <h3 id="player2-health-val">100</h3>
+                    <h3 style={{color: 'springgreen'}} id="player2-health-val">100</h3>
                     <LinearProgress style={{width: '75%'}} id="player2-health" variant='determinate' value={100} />
                   </div>                  
                 </div>

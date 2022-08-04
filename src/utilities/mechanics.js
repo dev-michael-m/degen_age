@@ -174,6 +174,12 @@ export const battle = async (p1,p2) => {
               players[1].health = players[1].health - attk.hit;
               document.getElementById('player2-health').children[0].style.transform = `translateX(-${100 - players[1].health}%)`;
               document.getElementById('player2-health-val').textContent = players[1].health > 0 ? `${players[1].health}` : 0;
+              
+              if(players[1].health > 25 && players[1].health <= 50){
+                document.getElementById('player2-health-val').style.color = 'orange';
+              }else if(players[1].health >= 0 && players[1].health <= 25){
+                document.getElementById('player2-health-val').style.color = 'red';
+              }
             }else{
               log(`${p1.race}'s attack was blocked...`)
             }
@@ -185,6 +191,12 @@ export const battle = async (p1,p2) => {
                 players[0].health = players[0].health - attk.hit;
                 document.getElementById('player1-health').children[0].style.transform = `translateX(-${100 - players[0].health}%)`;
                 document.getElementById('player1-health-val').textContent = players[0].health > 0 ? `${players[0].health}` : 0;
+
+                if(players[0].health > 25 && players[0].health <= 50){
+                  document.getElementById('player1-health-val').style.color = 'orange';
+                }else if(players[0].health >= 0 && players[0].health <= 25){
+                  document.getElementById('player1-health-val').style.color = 'red';
+                }
             }else {
               log(`${p2.race}'s attack was blocked...`)
             }

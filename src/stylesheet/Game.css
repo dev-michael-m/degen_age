@@ -2,6 +2,10 @@
     transform: scaleX(-1);
 }
 
+.defeated {
+  opacity: 0.5;
+}
+
 .p2-image, .p1-image {
     border: 4px solid gold;
 }
@@ -13,7 +17,7 @@
 .slash {
     background: linear-gradient(45deg,transparent 25%, gray 100%);
     height: 5px;
-    width: 300px;
+    width: 500px;
     border-radius: 50%;
     opacity: 0.85;
     transform: rotate(45deg);

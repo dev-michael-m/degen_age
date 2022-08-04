@@ -59,9 +59,13 @@ const HomeScreen = () => {
         address: null,
         cp: 100,
         schill: 99999,
-        race: state.faction,
+        race: "ELVES", //state.faction,
         selected: {
-            lvl: 256
+            lvl: 256,
+            str: 90,
+            mgc: 20,
+            rng: 40,
+            def: 55
         }
     })
 
@@ -154,9 +158,23 @@ const HomeScreen = () => {
                             <div>
                                 <h2 style={{color: getColorLvl(account.selected.lvl)}}>(Lvl. {account.selected.lvl})</h2>
                             </div>
-                            <div className='img-border'>
-                                <img src={NFT1} width={400}></img>                       
-                            </div> 
+                            <div className='nft-container'>
+                                <div className='nft-wrapper'>
+                                    <div className='card-front img-border'>
+                                        <img src={NFT1} width={400}></img>                       
+                                    </div> 
+                                    <div className='card-back'>
+                                        <h1>STATS</h1>
+                                        <div className='text-center'>
+                                            <p>Overall: {account.selected.lvl}</p>
+                                            <p>Strength: {account.selected.str} </p>
+                                            <p>Magic: {account.selected.mgc} </p>
+                                            <p>Range: {account.selected.rng} </p>
+                                            <p>Defense: {account.selected.def} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className='spacing-small'>
                                 <Button className='primary-white' variant="contained" onClick={handleBattle}>
                                     <div className='flex-align-center'>
