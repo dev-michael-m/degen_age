@@ -6,11 +6,36 @@ import ReadyIcon from '@mui/icons-material/ThumbUp';
 import LinearProgress from '@mui/material/LinearProgress';
 import HeartIcon from '@mui/icons-material/Favorite';
 import Modal from '@mui/material/Modal';
+import GameBG from '../assets/ivory hill.jpg';
+import AntiFire from '../assets/anti fire potion bottle.png';
+import AntiPoison from '../assets/anti poison potion bottle.png';
+import AntiShade from '../assets/anti shade potion bottle.png';
+import Health from '../assets/health potion bottle.png';
 import '../App.css';
 import '../stylesheet/Sections.css';
 import '../stylesheet/Game.css';
 import { battle, generateCollection, randNum } from '../utilities/mechanics';
 import { useNavigate } from 'react-router-dom';
+import Items from './Items';
+
+const ITEMS = [
+  {
+      count: 1,
+      img: Health
+  },
+  {
+      count: 2,
+      img: AntiPoison
+  },
+  {
+      count: 1,
+      img: AntiFire
+  },
+  {
+      count: 3,
+      img: AntiShade
+  }
+]
 
 const Game = ({img,game_id}) => {
     const [gameState,setGameState] = useState(false);
@@ -70,7 +95,8 @@ const Game = ({img,game_id}) => {
       }
 
     return (
-        <div className="main-container parallax-container">
+        <div className="main-container parallax-group">
+          <img className='game-bg' src={GameBG} width="100%"></img>
             <div className='inner-main'>
               {loading ?
               <div className='flex-just-center flex-align-center'>
@@ -90,8 +116,11 @@ const Game = ({img,game_id}) => {
                   </div>
                   <div className='float-small'>
                     <div className='hit-marker-container-right' id="hit-marker-container">
-                      <div><h2 id="hit-marker-p1"></h2><div style={{display: 'none'}} id="p1-block"><RemoveModeratorIcon className="block-icon" id="block-icon-p1" /></div></div>
+                      <div><h2 id="hit-marker-p1"></h2></div>
                     </div> 
+                    <div className='block-wrapper' style={{display: 'none'}} id="p1-block">
+                      <RemoveModeratorIcon className="block-icon" id="block-icon-p1" />
+                    </div>
                     <div className='slash-wrapper'>
                       <div id="p1-slash"></div>                      
                     </div>
@@ -106,12 +135,18 @@ const Game = ({img,game_id}) => {
                     <LinearProgress style={{width: '75%'}} id="player1-health" variant='determinate' value={100} />
                     <h3 style={{color: 'springgreen'}} id="player1-health-val">100</h3>
                   </div>  
-                  {!ready ? <Button className='primary-white' variant="contained" onClick={handleGameState}>
-                      <div className='flex-just-even flex-align-center' style={{width: 150}}>
-                          <div style={{paddingTop: 4}}>Ready</div>
-                          <ReadyIcon />    
-                      </div>
-                  </Button> : null}                                  
+                  <div>
+                    <Items items={ITEMS} layout="col" />  
+                  </div>                           
+                  {!ready ? 
+                  <div className='spacer'>
+                    <Button className='primary-white' variant="contained" onClick={handleGameState}>
+                        <div className='flex-just-even flex-align-center' style={{width: 150}}>
+                            <div style={{paddingTop: 4}}>Ready</div>
+                            <ReadyIcon />    
+                        </div>
+                    </Button>
+                  </div> : <div className='spacer'></div>}       
                 </div>
                 <div id="gameboard-middle" style={{width: '20%'}}>
                   <div className='log-wrapper'>
@@ -129,7 +164,10 @@ const Game = ({img,game_id}) => {
                   </div>
                   <div className='float-small-delayed'>
                     <div className='hit-marker-container-left' id="hit-marker-container">
-                      <div><h2 id="hit-marker-p2"></h2><div style={{display: 'none'}} id="p2-block"><RemoveModeratorIcon className='block-icon' id="block-icon-p2" /></div></div>
+                      <div><h2 id="hit-marker-p2"></h2></div>
+                    </div>
+                    <div className='block-wrapper' style={{display: 'none'}} id="p2-block">
+                      <RemoveModeratorIcon className="block-icon" id="block-icon-p2" />
                     </div>
                     <div className='slash-wrapper'>
                       <div id="p2-slash"></div>
@@ -144,7 +182,13 @@ const Game = ({img,game_id}) => {
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>
                     <h3 style={{color: 'springgreen'}} id="player2-health-val">100</h3>
                     <LinearProgress style={{width: '75%'}} id="player2-health" variant='determinate' value={100} />
-                  </div>                  
+                  </div>
+                  <div>
+                    <Items items={ITEMS} layout="col" />  
+                  </div>                   
+                  {!gameState ? <div>
+                    <h3>Ready</h3>
+                  </div> : <div className='spacer'></div>}
                 </div>
               </div>
               }

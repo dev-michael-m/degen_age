@@ -24,9 +24,9 @@
     cursor: grabbing;
 }
 
-.item-bag tr:hover {
+.item-bag td:hover {
     cursor: pointer;
-    background-color: rgba(255,255,255,0.92);
+    background-color: rgba(0,0,0,0.42);
     transition: 0.25s ease;
 }
 

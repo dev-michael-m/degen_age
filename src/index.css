@@ -31,9 +31,13 @@ code {
 }
 
 .main-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
   background: rgb(0,0,0);
   color: rgb(255,255,255);
   background-position-x: left;
+  overflow: hidden;
 }
 
 .inner-main {

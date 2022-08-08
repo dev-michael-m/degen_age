@@ -20,7 +20,6 @@ const Items = ({items,layout}) => {
             ));
         }else {
             let temp = [];
-            console.log({items})
             for(let i = 0; i < NUM_ITEMS; i++){
                 if(items.length && items[i] && items[i].count){ // item exists
                     temp.push(

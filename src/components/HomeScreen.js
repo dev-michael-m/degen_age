@@ -15,6 +15,7 @@ import AntiPoison from '../assets/anti poison potion bottle.png';
 import AntiShade from '../assets/anti shade potion bottle.png';
 import Health from '../assets/health potion bottle.png';
 import Logo from '../assets/degen age title GNW skull.png';
+import BWLogo from '../assets/degen age logo BNW.jpg';
 import NFT1 from '../assets/knight.png';
 import NFT2 from '../assets/knight 2.jpg';
 import Button from '@mui/material/Button';

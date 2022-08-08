@@ -367,6 +367,13 @@
   z-index: 100;
 }
 
+.block-wrapper {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  z-index: 100;
+}
+
 .defeat-wrapper h2 {
   display: none;
   color: red;
@@ -395,8 +402,8 @@
 }
 
 .block-icon {
-  color: white !important;
-  font-size: 40px !important;
+  color: rgba(255,255,255,0.92) !important;
+  font-size: 200px !important;
 }
 
 .marker-visible {
@@ -456,10 +463,23 @@
 }
 
 .card-back {
+  /* position: relative; */
   background-color: black;
   color: white;
   transform: rotateY(180deg);
 }
+
+/* .card-back::before {
+  content: "";
+  background-image: url('./assets/degen age logo BNW.jpg');
+  background-size: contain;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+} */
 
 .modal-wrapper {
   position: absolute;
