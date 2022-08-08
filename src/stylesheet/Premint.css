@@ -1,0 +1,31 @@
+.premint-container {
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255,255,255);
+}
+
+.premint-wrapper {
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.premint-input {
+    width: 100% !important;
+}
+
+.premint-input input {
+    text-align: center;
+}
+
+.premint-input .MuiOutlinedInput-root {
+    color: white !important;
+    border: 1px solid wheat !important;
+    border-radius: 30px !important;
+}

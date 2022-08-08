@@ -262,6 +262,18 @@
   padding: 26px;
 }
 
+.modal-medium {
+  position: absolute !important;
+  transform: translate(-50%, -50%) !important;
+  top: 50% !important;
+  left: 50% !important;
+  background-color: white !important;
+  width: 85%;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1300;
+}
+
 .video-container {
   width: 90%;
   margin: auto;
