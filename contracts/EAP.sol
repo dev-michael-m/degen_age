@@ -6,13 +6,10 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import "./ERC721A.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract EAP is ERC721A, Ownable {
     using Strings for uint256;
-    using ECDSA for bytes32;
-    using ECDSA for bytes;
-
+    
     uint256 public MAX_SUPPLY = 3000;
     uint256 public MAX_BATCH = 5;
     uint256 public SALE_PRICE = 0.008 ether;
@@ -22,12 +19,14 @@ contract EAP is ERC721A, Ownable {
     string public BASE_URL = "ipfs://QmRNnsqaP2qASYWVybUGnQhnXT3qrwZU6RopsvSTXc6khz/unrevealed.json";
     bytes32 public EXTENSION = ".json";
     bool public revealed;
-    address public PRIMARY = 0x182B80929672984a64d3d756588C7b3c217f0182;
-    address public PUB_KEY;
+    address public PRIMARY = 0x103EcE5B498b9c425295F58148Aa5bdAc7575708;
+    address public DEV;
     mapping(address => bool) private admins;
+    mapping(address => bool) private whitelist;
     
     constructor() ERC721A("Degen Age Early Adopters Pass", "EAP", MAX_BATCH, MAX_SUPPLY) {
-        addAdmin(PRIMARY);
+        admins[msg.sender] = true;
+        DEV = msg.sender;
     }
 
     modifier adminOnly {
@@ -57,12 +56,12 @@ contract EAP is ERC721A, Ownable {
     *   @dev Allows WL member to mint an Early Adopters Pass.  Users are only allowed to mint MAX_BATCH
     *   passes per address.
     */
-    function presale(bytes calldata _signature, uint256 quantity) public payable
+    function presale(uint256 quantity) public payable
     {
         require(!paused);
         require(totalSupply() + quantity <= MAX_SUPPLY, "All passes have been minted");
         require(sale_state == 1, "Sale is currently inactive");
-        require(isWhitelisted(_signature, msg.sender), "User is not whitelisted");
+        require(whitelist[msg.sender], "User is not whitelisted");
         require(msg.value == SALE_PRICE * quantity, "Incorrect amount of Ether");
         require(tx.origin == msg.sender, "Contracts are not allowed to mint");
         require(_numberMinted(msg.sender) + quantity <= MAX_BATCH, "Address is not allowed to mint more than MAX_BATCH");        
@@ -74,7 +73,7 @@ contract EAP is ERC721A, Ownable {
     // Address must be admin and PRIMARY address
     function devMint(uint256 quantity) public adminOnly {
         require(!paused);
-        require(msg.sender == PRIMARY, "Address is not allowed to mint.");
+        require(msg.sender == DEV, "Address is not allowed to mint.");
         require(quantity % MAX_BATCH == 0, "Can only mint a multiple of MAX_BATCH");
         require(totalSupply() + quantity <= GIVEAWAYS, "Quantity exceeds number of reserved tokens");
          
@@ -106,24 +105,17 @@ contract EAP is ERC721A, Ownable {
         return !revealed ? BASE_URL : string(abi.encodePacked(BASE_URL, _tokenId.toString(), EXTENSION));
     }
 
-    /**
-    *   @dev function to verify address is whitelisted
-    *   @param _signature - used to verify address
-    *   @param _user - address of connected user
-    *   @return bool verification
-    */
-    function isWhitelisted(bytes calldata _signature, address _user) private view returns(bool) {
-        return abi.encode(_user,MAX_SUPPLY).toEthSignedMessageHash().recover(_signature) == PUB_KEY;
-    }
-
     /* PRIVATE METHODS */
+
+    function setWhitelist(address[] calldata addresses) public adminOnly {
+        uint256 _length = addresses.length;
+        for(uint256 i = 0; i < _length; i++){
+            whitelist[addresses[i]] = true;
+        }
+    }
 
     function setPrimaryAddress(address _primary) public adminOnly {
         PRIMARY = _primary;
-    }
-
-    function setPublicKey(address _pubKey) public adminOnly {
-        PUB_KEY = _pubKey;
     }
 
     /*

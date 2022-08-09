@@ -3,7 +3,6 @@ const {whitelist} = require('../whitelist.json');
 
 require('dotenv').config();
 const _alkk = process.env.REACT_APP_ALKK;
-const _krp = process.env.REACT_APP_KRP;
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(_alkk);
@@ -54,22 +53,16 @@ export const Mint = async (_num, _address) => {
                 const price = await _contract.methods.SALE_PRICE().call();
                 const mint_price = parseFloat(web3.utils.fromWei(price,'ether'));
                 const _saleState = await _contract.methods.sale_state().call();
-                const max_supply = 3000;
-
+                
                 if(_saleState == 1){
                     const exists = whitelist.find(doc => doc.toUpperCase() == _address.toUpperCase());   // check address is on wl
-                    console.log({whitelist});
-                    console.log({_address});
-                    console.log({exists});
+                    
                     if(exists){
-                        const message = web3.eth.abi.encodeParameters(["address","uint256"],[_address,max_supply]);
-                        const {signature} = web3.eth.accounts.sign(message,_krp);
-                       
                         const tx = {
                             from: _address,
                             to: process.env.REACT_APP_CONTRACT_ADDRESS,
                             value: web3.utils.toHex(web3.utils.toWei(String((mint_price * _num).toFixed(DECIMALS)),'ether')),
-                            data: _contract.methods.presale(signature,_num).encodeABI(),
+                            data: _contract.methods.presale(_num).encodeABI(),
                         }
 
                         const txHash = await window.ethereum.request({
