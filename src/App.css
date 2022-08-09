@@ -361,9 +361,16 @@
   z-index: 100;
 }
 
-.slash-wrapper, .defeat-wrapper {
+.slash-wrapper, .defeat-wrapper, .ready-wrapper {
   position: absolute;
   top: 50%;
+  z-index: 100;
+}
+
+.ready-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 8%;
   z-index: 100;
 }
 
@@ -372,6 +379,12 @@
   top: 25%;
   right: 25%;
   z-index: 100;
+}
+
+.ready-wrapper h2 {
+  color: wheat;
+  font-size: 100px;
+  margin: 0;
 }
 
 .defeat-wrapper h2 {
@@ -490,6 +503,16 @@
   background-color: white;
   border-radius: 4px;
   box-shadow: 0px 0px 10px black,
+}
+
+.blnk-modal-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  color: white;
+  text-align: center;
 }
 
 .fade-overlay {

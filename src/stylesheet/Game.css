@@ -15,7 +15,7 @@
 }
 
 .spacer {
-  margin: 16px 0px;
+  margin: 35px 0px;
 }
 
 .game-bg {
@@ -29,7 +29,7 @@
 
 .slash {
     background: linear-gradient(45deg,transparent 25%, gray 100%);
-    height: 5px;
+    height: 8px;
     width: 500px;
     border-radius: 50%;
     opacity: 0.85;

@@ -43,6 +43,8 @@ const Game = ({img,game_id}) => {
     const [winner,setWinner] = useState(false);
     const [loading,setLoading] = useState(true);
     const [collection,setCollection] = useState([]);
+    const [prep,setPrep] = useState(false);
+    const [pregame,setPregame] = useState(false);
     const [ready,setReady] = useState(false);
     const [modalOpen,setModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -63,9 +65,28 @@ const Game = ({img,game_id}) => {
       setModalOpen(prevState => !prevState);
     }
 
+    const setPreScreen = (_ms) => {
+      return new Promise(async(resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        },_ms);
+      })
+    }
+
     const handleGameState = async () => {
         setGameState(true);
         setReady(true);
+        setPrep(true);
+
+        await setPreScreen(2500);
+        
+        setPrep(false);
+        setPregame(true);
+
+        await setPreScreen(1500);
+
+        setPregame(false);
+
         if(Object.keys(players).length){
           const status = await battle(players.p1, players.p2);
           setWinner(status.winner);
@@ -110,6 +131,16 @@ const Game = ({img,game_id}) => {
                     <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Leave</Button>
                   </div>
                 </Modal>
+                <Modal open={prep} >
+                  <div className='blnk-modal-wrapper'>
+                    <h1>The Game is About to Begin</h1>
+                  </div>
+                </Modal>
+                <Modal open={pregame} >
+                  <div className='blnk-modal-wrapper'>
+                    <h1>Battle!</h1>
+                  </div>
+                </Modal>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
                   <div>
                     <h3 style={{color: 'gold'}}>{players.p1.race} (Lvl. {players.p1.overall})</h3>
@@ -137,16 +168,7 @@ const Game = ({img,game_id}) => {
                   </div>  
                   <div>
                     <Items items={ITEMS} layout="col" />  
-                  </div>                           
-                  {!ready ? 
-                  <div className='spacer'>
-                    <Button className='primary-white' variant="contained" onClick={handleGameState}>
-                        <div className='flex-just-even flex-align-center' style={{width: 150}}>
-                            <div style={{paddingTop: 4}}>Ready</div>
-                            <ReadyIcon />    
-                        </div>
-                    </Button>
-                  </div> : <div className='spacer'></div>}       
+                  </div>                                  
                 </div>
                 <div id="gameboard-middle" style={{width: '20%'}}>
                   <div className='log-wrapper'>
@@ -157,6 +179,15 @@ const Game = ({img,game_id}) => {
                     <h2>{winner === 1 ? `You Won!` : winner === 0 ? `Defeat!` : ""}</h2>
                     {winner ? <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Leave</Button> : null}
                   </div>
+                  {!ready ? 
+                  <div className='spacer flex-just-even flex-align-center'>
+                    <Button className='primary-white' variant="contained" onClick={handleGameState}>
+                        <div className='flex-just-even flex-align-center' style={{width: 150}}>
+                            <div style={{paddingTop: 4}}>Ready</div>
+                            <ReadyIcon />    
+                        </div>
+                    </Button>
+                  </div> : null}
                 </div>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
                   <div>
@@ -175,6 +206,9 @@ const Game = ({img,game_id}) => {
                     <div className='defeat-wrapper'>
                       <h2 id="p2-defeat">DEFEAT</h2>  
                     </div>
+                    {!gameState ? <div className='ready-wrapper'>
+                      <h2>READY</h2>  
+                    </div> : null}
                     <div id="p2-img-wrapper">
                         <img className='p2-image' id="p2-image" src={players.p2.image} width={400} height={400}></img>                        
                     </div>                    
@@ -183,12 +217,7 @@ const Game = ({img,game_id}) => {
                     <h3 style={{color: 'springgreen'}} id="player2-health-val">100</h3>
                     <LinearProgress style={{width: '75%'}} id="player2-health" variant='determinate' value={100} />
                   </div>
-                  <div>
-                    <Items items={ITEMS} layout="col" />  
-                  </div>                   
-                  {!gameState ? <div>
-                    <h3>Ready</h3>
-                  </div> : <div className='spacer'></div>}
+                  <div className='spacer'></div>
                 </div>
               </div>
               }
