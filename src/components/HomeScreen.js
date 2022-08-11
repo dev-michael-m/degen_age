@@ -56,24 +56,15 @@ const HomeScreen = () => {
         Welcome to Degen Age! The metaverse's first online NFT game...
     `)
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [account,setAccount] = useState({
-        address: null,
-        cp: 100,
-        schill: 99999,
-        race: "ELVES", //state.faction,
-        selected: {
-            lvl: 256,
-            str: 90,
-            mgc: 20,
-            rng: 40,
-            def: 55
-        }
-    })
+    const [account,setAccount] = useState({});
 
     useEffect(() => {
         let mounted = true;
 
         if(mounted){
+            setAccount({
+                ...state.player
+            })
             window.onload = () => {
                 $('tbody').sortable();
             }
@@ -93,7 +84,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <div id="home-container" className={`home-container ${account.race}`}>
+        <div id="home-container" className={`home-container ${account.faction}`}>
             <div id="home-inner-container" className='home-inner-container'>
                 <Drawer
                     anchor='left'
@@ -148,7 +139,7 @@ const HomeScreen = () => {
                             </div>
                             <div style={{width: 80}} id="schills" className='flex-just-even flex-align-center'>
                                 <img style={{marginRight: 8}} src={SchillIcon} width={20}></img>
-                                <label className={`top-bar-label-sch ${account.cp >= 1e6 && account.cp < 1e9 ? 'label-green' : account.cp >= 1e9 && account.cp < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(account.schill)}</label>
+                                <label className={`top-bar-label-sch ${account.tokens >= 1e6 && account.tokens < 1e9 ? 'label-green' : account.tokens >= 1e9 && account.tokens < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(account.tokens)}</label>
                             </div>
                         </div>
                     </div>                    
@@ -157,7 +148,7 @@ const HomeScreen = () => {
                     <div className='home-primary-wrapper'>
                         <div className='flex-column flex-align-center'>
                             <div>
-                                <h2 style={{color: getColorLvl(account.selected.lvl)}}>(Lvl. {account.selected.lvl})</h2>
+                                <h2 style={{color: getColorLvl(account.selected ? account.selected.lvl : 0)}}>(Lvl. {account.selected ? account.selected.lvl : 0})</h2>
                             </div>
                             <div className='nft-container'>
                                 <div className='nft-wrapper'>
@@ -167,11 +158,11 @@ const HomeScreen = () => {
                                     <div className='card-back'>
                                         <h1>STATS</h1>
                                         <div className='text-center'>
-                                            <p>Overall: {account.selected.lvl}</p>
-                                            <p>Strength: {account.selected.str} </p>
-                                            <p>Magic: {account.selected.mgc} </p>
-                                            <p>Range: {account.selected.rng} </p>
-                                            <p>Defense: {account.selected.def} </p>
+                                            <p>Overall: {account.selected ? account.selected.lvl : 0}</p>
+                                            <p>Strength: {account.selected ? account.selected.str : 0} </p>
+                                            <p>Magic: {account.selected ? account.selected.mgc : 0} </p>
+                                            <p>Range: {account.selected ? account.selected.rng : 0} </p>
+                                            <p>Defense: {account.selected ? account.selected.def : 0} </p>
                                         </div>
                                     </div>
                                 </div>
