@@ -15,7 +15,7 @@ import '../App.css';
 import '../stylesheet/Sections.css';
 import '../stylesheet/Game.css';
 import { battle, generateCollection, randNum } from '../utilities/mechanics';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Items from './Items';
 
 const ITEMS = [
@@ -48,6 +48,7 @@ const Game = ({img,game_id}) => {
     const [ready,setReady] = useState(false);
     const [modalOpen,setModalOpen] = useState(false);
     const navigate = useNavigate();
+    const {state} = useLocation();
 
     useEffect(() => {
         let mounted = true;
@@ -108,7 +109,6 @@ const Game = ({img,game_id}) => {
         const _p2 = randNum(0,_collection.length);
         setPlayers({p1: _collection[_p1], p2: _collection[_p2]});
         setLoading(false);
-        console.log('Players are set')
       }
 
       const handleGameEnd = () => {

@@ -36,6 +36,7 @@ const Landing = () => {
             navigate('/select', {state: {address: res.address}});
           }else{
             const playerData = _query.docs[0].data();
+            
             navigate('/play', {
               state: {
                 player: {

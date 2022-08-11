@@ -63,7 +63,14 @@ const HomeScreen = () => {
 
         if(mounted){
             setAccount({
-                ...state.player
+                ...state.player,
+                selected: {
+                    lvl: 200,
+                    str: 59,
+                    mgc: 10,
+                    rng: 30,
+                    def: 101
+                }
             })
             window.onload = () => {
                 $('tbody').sortable();
@@ -80,7 +87,11 @@ const HomeScreen = () => {
     }
 
     const handleBattle = () => {
-        navigate('/warroom');
+        navigate('/warroom', {
+            state: {
+                player: account
+            }
+        });
     }
 
     return (
