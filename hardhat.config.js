@@ -17,10 +17,10 @@ module.exports = {
          }
       }
    },
-   defaultNetwork: "rinkeby",
+   defaultNetwork: "mainnet",
    networks: {
       hardhat: {},
-      rinkeby: {
+      mainnet: {
          url: process.env.ALKU,
          accounts: [`0x${process.env.REACT_APP_KRP}`]
       }
