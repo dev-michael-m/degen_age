@@ -77,7 +77,6 @@ const MintPage = () => {
     const handleWalletConnect = () => {
         connectWalletSync().then(res => {
             if(res.status){
-                console.log(res.address);
                 setWallet(res.address);
                 setOpenAlert({
                     open: true,
