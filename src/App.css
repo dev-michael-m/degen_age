@@ -194,6 +194,11 @@
   justify-content: space-between;
 }
 
+.flex-just-around {
+  display: flex;
+  justify-content: space-around;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -282,6 +287,26 @@
   padding: 16px 0px 0px 0px;
 }
 
+.spacing-small {
+  padding: 45px;
+}
+
+.spacing-vsmall {
+  padding: 26px;
+}
+
+.modal-medium {
+  position: absolute !important;
+  transform: translate(-50%, -50%) !important;
+  top: 50% !important;
+  left: 50% !important;
+  background-color: white !important;
+  width: 85%;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1300;
+}
+
 .video-container {
   width: 90%;
   margin: auto;
@@ -356,6 +381,17 @@
 
 .marker-visible {
   animation: hit-marker 1.25s ease-in;
+}
+
+.primary-white {
+  background-color: rgb(255,255,255) !important;
+  color: rgb(0,0,0) !important;
+  border-radius: 22px !important;
+}
+
+.primary-white:hover {
+  background-color: rgba(255,255,255,0.84) !important;
+  box-shadow: 0px 0px 10px rgb(255, 255, 255) !important;
 }
 
 .game-log {

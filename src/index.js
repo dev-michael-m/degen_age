@@ -11,6 +11,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import LorePage from './components/LorePage';
+import Premint from './components/Premint';
 
 import MintPage from './components/MintPage';
 
@@ -22,6 +24,8 @@ ReactDOM.render(
         <Route exact path="/play" element={<HomeScreen />} />
         <Route exact path="/marketplace" element={<MarketPlace />} /> */}
         <Route exact path="/mint" element={<MintPage />} />
+        <Route path="/lore/:id" element={<LorePage />} />
+        <Route path="/premint" element={<Premint />} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </Router>    
