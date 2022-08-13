@@ -45,6 +45,13 @@ const Selection = () => {
             games_won: 0,
             online: true,
             selected_char: 0,
+            selected: {
+                lvl: 0,
+                mgc: 0,
+                str: 0,
+                rng: 0,
+                def: 0
+            },
             time_played: 0,
             tokens: 0,
             total_cp: 0,

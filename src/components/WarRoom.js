@@ -15,36 +15,38 @@ const WarRoom = () => {
         });
     }
 
+    console.log(state.player.tokens)
+
     return (
         <div className='warroom-container'>
             <div className='warroom-wrapper'>
                 <h1>Select Your Battle</h1>
                 <div className='wr-wrapper'>
-                    <div className='wr-card' onClick={state.tokens && state.tokens >= 500 ? handleBattleSelection : null}>
+                    <div className='wr-card' onClick={state.player.tokens && state.player.tokens >= 500 ? handleBattleSelection : null}>
                         <h2>East Run</h2>
                         <h3>500 $SCHIL</h3>
-                        <div style={state.tokens && state.tokens >= 500 ? null : {display: 'none'}} className={state.tokens && state.tokens >= 500 ? '' : 'lock'}>
+                        <div style={state.player.tokens && state.player.tokens >= 500 ? {display: 'none'} : null} className={state.player.tokens && state.player.tokens >= 500 ? '' : 'lock'}>
                             <LockedIcon />
                         </div>
                     </div>
-                    <div className='wr-card kata-rhama' onClick={state.tokens && state.tokens >= 1000 ? handleBattleSelection : null}>
+                    <div className='wr-card kata-rhama' onClick={state.player.tokens && state.player.tokens >= 1000 ? handleBattleSelection : null}>
                         <h2>K'ata Rhama</h2>
                         <h3>1,000 $SCHIL</h3>
-                        <div style={state.tokens && state.tokens >= 1000 ? null : {display: 'none'}} className={state.tokens && state.tokens >= 1000 ? '' : 'lock'}>
+                        <div style={state.player.tokens && state.player.tokens >= 1000 ? {display: 'none'} : null} className={state.player.tokens && state.player.tokens >= 1000 ? '' : 'lock'}>
                             <LockedIcon />
                         </div>
                     </div>
-                    <div className='wr-card' onClick={state.tokens && state.tokens >= 2500 ? handleBattleSelection : null}>
+                    <div className='wr-card' onClick={state.player.tokens && state.player.tokens >= 2500 ? handleBattleSelection : null}>
                         <h2>King's Crossing</h2>
                         <h3>2,500 $SCHIL</h3>
-                        <div style={state.tokens && state.tokens >= 2500 ? null : {display: 'none'}} className={state.tokens && state.tokens >= 2500 ? '' : 'lock'}>
+                        <div style={state.player.tokens && state.player.tokens >= 2500 ? {display: 'none'} : null} className={state.player.tokens && state.player.tokens >= 2500 ? '' : 'lock'}>
                             <LockedIcon />
                         </div>
                     </div>
-                    <div className={`wr-card ivory-hill ${state.tokens && state.tokens >= 5000 ? "" : 'locked'}`} onClick={state.tokens && state.tokens >= 5000 ? handleBattleSelection : null}>
+                    <div className={`wr-card ivory-hill ${state.player.tokens && state.player.tokens >= 5000 ? "" : 'locked'}`} onClick={state.player.tokens && state.player.tokens >= 5000 ? handleBattleSelection : null}>
                         <h2>Ivory Hill</h2>
                         <h3>5,000 $SCHIL</h3>
-                        <div style={state.tokens && state.tokens >= 5000 ? null : {display: 'none'}} className={state.tokens && state.tokens >= 5000 ? '' : 'lock'}>
+                        <div style={state.player.tokens && state.player.tokens >= 5000 ? {display: 'none'} : null} className={state.player.tokens && state.player.tokens >= 5000 ? '' : 'lock'}>
                             <LockedIcon />
                         </div>
                     </div>

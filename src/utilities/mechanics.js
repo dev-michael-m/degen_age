@@ -43,21 +43,21 @@ export const generateCollection = () => {
   	const _raceIdx = randNum(0,RACE.length);
     _collection.push({
     	id: (i+1).toString().padStart(2,'0'),
-    	race: RACE[_raceIdx].name,
-      combatType: RACE[_raceIdx].type.general,
-      image: RACE[_raceIdx].asset,
-      stats: {
-      	strength: RACE[_raceIdx].type.general == TYPES.MELEE.general ? randNum(TYPES.MELEE.val,100) : randNum(1,TYPES.MELEE.val),
-        range: RACE[_raceIdx].type.general == TYPES.RANGE.general ? randNum(TYPES.RANGE.val,100) : randNum(1,TYPES.RANGE.val),
-        magic: RACE[_raceIdx].type.general == TYPES.MAGIC.general ? randNum(TYPES.MAGIC.val,100) : randNum(1,TYPES.MAGIC.val),
-        defense: randNum(1,100)
+    	faction: _raceIdx,
+      selected: {
+        str: RACE[_raceIdx].type.general == TYPES.MELEE.general ? randNum(TYPES.MELEE.val,100) : randNum(1,TYPES.MELEE.val),
+        rng: RACE[_raceIdx].type.general == TYPES.RANGE.general ? randNum(TYPES.RANGE.val,100) : randNum(1,TYPES.RANGE.val),
+        mgc: RACE[_raceIdx].type.general == TYPES.MAGIC.general ? randNum(TYPES.MAGIC.val,100) : randNum(1,TYPES.MAGIC.val),
+        def: randNum(1,100),
+        img: RACE[_raceIdx].asset,
+        combatType: RACE[_raceIdx].type.general
       }
     })
   }
   
   const _finalCollection = _collection.map(asset => ({
   	...asset,
-    overall: Object.values(asset.stats).reduce((acc, val) => acc + val,0)
+    overall: Object.values(asset.selected).reduce((acc, val) => acc + val,0)
   }));
   
   return _finalCollection;
@@ -74,14 +74,14 @@ const getHitSuccess = (_max) => {
 
 const getAttk = (_attacker, _defender, _curPlayer) => {
 	return new Promise((resolve,reject) => {
-  	const _combatType = _attacker.combatType;
-  	const _advantage = getAdvantage(_combatType, _defender.combatType);
-    const _hitRoll = _advantage ? Math.round((_defender.stats.defense + _defender.stats[TYPES[_combatType].name])/2) : _defender.stats.defense;
+  	const _combatType = _attacker.selected.combatType;
+  	const _advantage = getAdvantage(_combatType, _defender.selected.combatType);
+    const _hitRoll = _advantage ? Math.round((_defender.selected.def + _defender.selected[TYPES[_combatType].name])/2) : _defender.selected.def;
     const _hitSuccess = getHitSuccess(_hitRoll);
     
     // check how much to hit defender
     if(_hitSuccess){      
-    	const _maxHit = Math.round(_attacker.stats[TYPES[_combatType].name] * (1 - (_defender.stats.defense/100)));
+    	const _maxHit = Math.round(_attacker.selected[TYPES[_combatType].name] * (1 - (_defender.selected.def/100)));
       const _hit = randNum(1,_maxHit);
       setTimeout(() => {
       	hitMarkerVisible(_curPlayer == 1 ? 2 : 1, _hit);

@@ -5,6 +5,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url('../assets/loading screen 1.jpg');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .warroom-wrapper {
@@ -24,7 +28,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 0.3;
+    opacity: 0.5;
     position: relative;
 }
 

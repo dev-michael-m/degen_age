@@ -65,11 +65,8 @@ const HomeScreen = () => {
             setAccount({
                 ...state.player,
                 selected: {
-                    lvl: 200,
-                    str: 59,
-                    mgc: 10,
-                    rng: 30,
-                    def: 101
+                    ...state.player.selected,
+                    img: NFT1
                 }
             })
             window.onload = () => {

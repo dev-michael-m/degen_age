@@ -89,7 +89,7 @@ const Game = ({img,game_id}) => {
         setPregame(false);
 
         if(Object.keys(players).length){
-          const status = await battle(players.p1, players.p2);
+          const status = await battle(state.player, players.p2);
           setWinner(status.winner);
 
           if(status.winner == 1){
@@ -142,8 +142,9 @@ const Game = ({img,game_id}) => {
                   </div>
                 </Modal>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
-                  <div>
-                    <h3 style={{color: 'gold'}}>{players.p1.race} (Lvl. {players.p1.overall})</h3>
+                  <div className='text-center'>
+                    <h3 style={{color: 'gold'}}>{state.player.user_name}</h3>
+                    <h3 style={{color: 'gold'}}>(Lvl. {state.player.selected.lvl})</h3>
                   </div>
                   <div className='float-small'>
                     <div className='hit-marker-container-right' id="hit-marker-container">
@@ -159,7 +160,7 @@ const Game = ({img,game_id}) => {
                       <h2 id="p1-defeat">DEFEAT</h2>  
                     </div> 
                     <div id="p1-img-wrapper">
-                        <img className='p1-image' id="p1-image" src={players.p1.image} width={400} height={400}></img>                        
+                        <img className='p1-image' id="p1-image" src={state.player.selected.img} width={400} height={400}></img>                        
                     </div>                  
                   </div>
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>
@@ -190,8 +191,9 @@ const Game = ({img,game_id}) => {
                   </div> : null}
                 </div>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
-                  <div>
-                      <h3>{players.p2.race} (Lvl. {players.p2.overall})</h3>                                       
+                  <div className='text-center'>
+                      <h3>{`FluffyDemon9`}</h3>
+                      <h3>(Lvl. {players.p2.overall})</h3>                                       
                   </div>
                   <div className='float-small-delayed'>
                     <div className='hit-marker-container-left' id="hit-marker-container">
