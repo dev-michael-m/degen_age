@@ -1,5 +1,6 @@
 import CrystalImg from './assets/crystal cavern full.jpg';
 import BookImg from './assets/books promo.png';
+import ElveSword from './assets/elven sword.jpg';
 
 export const LORE = [
   {
@@ -81,6 +82,52 @@ The Brakkarian leader studied the man.
 The Brakkarian leader walked over and gingerly picked up the book. The title was faded and unreadable. He opened up the book and began to read. At that moment, the engraved symbols on the cage disappeared, and the prisoner's chains unlocked. 
     
 “Ahh, that's better. Now let's discuss this prophecy.”      
+    `
+  },
+  {
+    path: "elven king",
+    title: `Chapt. III - Rise of the Elven King`,
+    img: ElveSword,
+    size: '50%',
+    text: `
+    Long before in the land of the Elves, there was a young elf with dreams. Dreams of exploration and power. He lived in a palace with his siblings and parents. He was royalty, a prince with little to no freedom to explore. He was third in line right after his two brothers. 
+
+For a few weeks now, the adventurous prince had been sneaking out of the palace walls and into the outer villages. Always in a disguise, he became aware of a plot to overthrow the palace and replace the rulers with new ones. Instead of warning his so-called “family”, he joined the group and disclosed to them secret passageways into the palace.
+ 
+The night was bright with the two moons at full shine. It was time for the rebellion to begin. The prince's identity was known as a merchant from within the palace walls. Even if his real identity was revealed, he would have no remorse. 
+
+During his time within the outer villages, he's seen what poor management can do to a kingdom. Stealing from the lesser elves, slaughtering the families that couldn't afford to pay their living fees. Using the kingdom's armies for private use.  He knew if he didn't act now, the outer villages would continue to suffer. 
+
+He finally had enough of his family's cruelty.  With the rebellious group growing even larger, he knew he must lead the charge…
+	
+Showing no mercy, he decimated each guard that stood in his way towards the palace. He moved swiftly like a shadow, no sound, only silence. Hiding each body as they moved along.  Inching closer to his parents' room, the prince noticed his brother's bodies had already been mutilated and brutalized. 
+
+“They weren't meant to be touched", he whispered.
+
+Upon reaching his parents' room, he could hear screaming coming from within. Slowly opening the door he noticed that his father was in a drunken stupor pointing a sword at his mother. His mother was backed up against a wall with blood dripping from her left arm. 
+
+“The son I want to rule has been corrupted with your stupid fairy tails and lies. I will not have you corrupt him any longer, you foul beast!” 
+
+“You are the one who is corrupt.”, a voice whispered in his ear. 
+
+He knew that voice, but it was too late to say anything. Darkness encased his vision. The king was knocked unconscious and now laying on the floor. The prince rushed to his mother. 
+
+“My boy, my sweet adventurous boy.” 
+
+Those were the last words he heard from his mother as she slowly died in his arms. He then walked over to his father and tied him to a chair. The King was still unconscious when the prince walked out of the room. 
+
+“No one goes in or out of this room until I say so.”, he proclaimed.
+
+The prince went back into the room and picked up his father's sword. The king woke up finding himself tied up to a chair. 
+
+“You can untie me now, my son.” 
+
+“Your son? Your son is dead. He died with his brothers. Butchered, mutilated, and probably tortured too. You are no father of mine or even a king.” 
+
+The prince's voice was cold and bitter. He observed the elven blade. As the king began to speak, the prince chopped his father's head off.
+
+The prince walked out of the room bloody and emotionless. It was his time to rule.
+
     `
   }
 ];

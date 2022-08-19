@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 const LORE_LIST = [
   {display: 'Chapt. I - The Origin Story', path: `origins`},
-  {display: 'Chapt. II - A Prophecy Untold', path: `prophecy`}
+  {display: 'Chapt. II - A Prophecy Untold', path: `prophecy`},
+  {display: 'Chapt. III - Rise of the Elven King', path: `elven king`},
 ]
 
 const Landing = () => {
