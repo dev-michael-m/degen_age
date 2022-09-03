@@ -71,3 +71,13 @@
     background-image: url('../assets/kata rhama.jpg');
     background-position: bottom;
 }
+
+.east-run {
+    background-image: url('../assets/east run wr.jpg');
+    background-position: right;
+}
+
+.kings-crossing {
+    background-image: url('../assets/kings crossing wr.jpg');
+    background-position: center;
+}

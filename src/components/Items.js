@@ -8,12 +8,12 @@ const Items = ({items,layout}) => {
         let mappedItems = [];
 
         if(layout === 'row'){
-            mappedItems = items.map((item) => (
-              <tr>
-                <td>
-                  <div className="item-wrapper">
-                    <label className="item-counter">x{item.count}</label>
-                    <img className="item-img" src={item.img} width={50}></img>
+            mappedItems = items.map((item, idx) => (
+              <tr key={idx}>
+                <td key={idx}>
+                  <div key={idx} className="item-wrapper">
+                    <label key={idx} className="item-counter">x{item.count}</label>
+                    <img key={idx} className="item-img" src={item.img} width={40}></img>
                   </div>
                 </td>
               </tr>
@@ -23,34 +23,35 @@ const Items = ({items,layout}) => {
             for(let i = 0; i < NUM_ITEMS; i++){
                 if(items.length && items[i] && items[i].count){ // item exists
                     temp.push(
-                      <td>
-                        <div className="item-wrapper">
-                          <label className="item-counter">x{items[i].count}</label>
+                      <td key={i}>
+                        <div key={i}  className="item-wrapper">
+                          <label key={i} className="item-counter">x{items[i].count}</label>
                           <img
                             className="item-img"
+                            key={i}
                             src={items[i].img}
-                            width={50}
+                            width={40}
                           ></img>
                         </div>
                       </td>
                     );
                 }else{
                     temp.push(
-                        <td></td>
+                        <td key={i}></td>
                     )
                 }
             }
 
             mappedItems.push(
-              <tr>{temp}</tr>
+              <tr key={9999}>{temp}</tr>
             );
         }
 
         if(mappedItems.length != NUM_ITEMS && layout === 'row'){
             for(let i = 0; i < NUM_ITEMS - mappedItems.length; i++){
                 mappedItems.push(
-                  <tr>
-                    <td>
+                  <tr key={i + mappedItems.length - 1}>
+                    <td key={i + mappedItems.length - 1}>
                     </td>
                   </tr>
                 );

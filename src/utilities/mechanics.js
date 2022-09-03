@@ -1,12 +1,12 @@
-import Elf from '../assets/knight 3.png';
-import Goblin from '../assets/knight.png';
-import Knight from '../assets/knight 2.jpg';
-import Wizard from '../assets/knight 4.png';
+import Elf from '../assets/elf nft.jpg';
+import Goblin from '../assets/goblin compressed.jpg';
+import Knight from '../assets/knight 4.png';
+import Wizard from '../assets/wizard compressed.jpg';
 
 const TYPES = {
-    MAGIC: {val: 40, name: 'magic', adv: 'MELEE', general: 'MAGIC'},
-    MELEE: {val: 40, name: 'strength', adv: 'RANGE', general: 'MELEE'},
-    RANGE: {val: 40, name: 'range', adv: 'MAGIC', general: 'RANGE'}
+    MAGIC: {val: 40, name: 'mgc', adv: 'MELEE', general: 'MAGIC'},
+    MELEE: {val: 40, name: 'str', adv: 'RANGE', general: 'MELEE'},
+    RANGE: {val: 40, name: 'rng', adv: 'MAGIC', general: 'RANGE'}
 }
 
 export const RACE = [
@@ -44,6 +44,7 @@ export const generateCollection = () => {
     _collection.push({
     	id: (i+1).toString().padStart(2,'0'),
     	faction: _raceIdx,
+      user_name: `FluffyDemon9`,
       selected: {
         str: RACE[_raceIdx].type.general == TYPES.MELEE.general ? randNum(TYPES.MELEE.val,100) : randNum(1,TYPES.MELEE.val),
         rng: RACE[_raceIdx].type.general == TYPES.RANGE.general ? randNum(TYPES.RANGE.val,100) : randNum(1,TYPES.RANGE.val),
@@ -57,7 +58,7 @@ export const generateCollection = () => {
   
   const _finalCollection = _collection.map(asset => ({
   	...asset,
-    overall: Object.values(asset.selected).reduce((acc, val) => acc + val,0)
+    overall: asset.selected.str + asset.selected.rng + asset.selected.mgc + asset.selected.def
   }));
   
   return _finalCollection;
@@ -81,7 +82,7 @@ const getAttk = (_attacker, _defender, _curPlayer) => {
     
     // check how much to hit defender
     if(_hitSuccess){      
-    	const _maxHit = Math.round(_attacker.selected[TYPES[_combatType].name] * (1 - (_defender.selected.def/100)));
+      const _maxHit = Math.round(_attacker.selected[TYPES[_combatType].name] * (1 - Math.abs(_defender.selected.def/100)));
       const _hit = randNum(1,_maxHit);
       setTimeout(() => {
       	hitMarkerVisible(_curPlayer == 1 ? 2 : 1, _hit);
@@ -158,19 +159,19 @@ const setDelay = (_delay) => {
 
 export const battle = async (p1,p2) => {
     return new Promise(async (resolve) => {
-        let curPlayer = randNum(0,1);	// check which player goes first
+        let curPlayer = randNum(1,2) - 1;	// check which player goes first
         const players = [
-            {health: 100, id: 0},
+          {health: 100, id: 0},
           {health: 100, id: 1}
         ]
 
         await setDelay(1500);
-        log(`${curPlayer == 0 ? p1.race : p2.race} goes first...`);
+        log(`${curPlayer == 0 ? p1.user_name : p2.user_name} goes first...`);
         while(players[0].health > 0 && players[1].health > 0){
             if(curPlayer == 0){	// p1 goes first
               const attk = await getAttk(p1,p2,1);
             if(attk.hit){
-              log(`${p1.race} dealt piercing damage: ${attk.hit}`);
+              log(`${p1.user_name} dealt piercing damage: ${attk.hit}`);
               players[1].health = players[1].health - attk.hit;
               document.getElementById('player2-health').children[0].style.transform = `translateX(-${100 - players[1].health}%)`;
               document.getElementById('player2-health-val').textContent = players[1].health > 0 ? `${players[1].health}` : 0;
@@ -181,13 +182,13 @@ export const battle = async (p1,p2) => {
                 document.getElementById('player2-health-val').style.color = 'red';
               }
             }else{
-              log(`${p1.race}'s attack was blocked...`)
+              log(`${p1.user_name}'s attack was blocked...`)
             }
             curPlayer = 1;
           }else{	// p2 goes first
             const attk = await getAttk(p2,p1,2);
             if(attk.hit){
-                log(`${p2.race} dealt piercing damage: ${attk.hit}`);
+                log(`${p2.user_name} dealt piercing damage: ${attk.hit}`);
                 players[0].health = players[0].health - attk.hit;
                 document.getElementById('player1-health').children[0].style.transform = `translateX(-${100 - players[0].health}%)`;
                 document.getElementById('player1-health-val').textContent = players[0].health > 0 ? `${players[0].health}` : 0;
@@ -198,7 +199,7 @@ export const battle = async (p1,p2) => {
                   document.getElementById('player1-health-val').style.color = 'red';
                 }
             }else {
-              log(`${p2.race}'s attack was blocked...`)
+              log(`${p2.user_name}'s attack was blocked...`)
             }
             curPlayer = 0;
           }
@@ -208,10 +209,10 @@ export const battle = async (p1,p2) => {
         
         
         if(players[0].health <= 0){
-            log(`${p2.race} Wins!`);
+            log(`${p2.user_name} Wins!`);
             resolve({status: true, winner: 2})
         }else if(players[1].health <= 0){
-          log(`${p1.race} Wins!`);  
+          log(`${p1.user_name} Wins!`);  
           resolve({status: true, winner: 1})
         }
     })

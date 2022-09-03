@@ -1,7 +1,8 @@
 import React from 'react';
 import '../stylesheet/Card.css';
+import Tooltip from '@mui/material/Tooltip';
 
-const Card = ({desc,name,title,cardStyle,onClick}) => {
+const Card = ({ability,desc,name,title,cardStyle,onClick}) => {
 
     const handleCardSelect = () => {
         onClick(name);
@@ -12,7 +13,9 @@ const Card = ({desc,name,title,cardStyle,onClick}) => {
             <div className='card-wrapper'>
                 <img src={title} width={200} height={100}></img>
                 <div>
-                    <p>{desc}</p>
+                    <Tooltip title={`Ability: ${desc}`}>
+                        <img className='char-ability' src={ability}></img>
+                    </Tooltip>
                 </div>
             </div>
         </div>

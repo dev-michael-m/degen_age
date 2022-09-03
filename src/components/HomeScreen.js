@@ -11,23 +11,24 @@ import CPIcon from '@mui/icons-material/Api';
 import SchillIcon from '../assets/schil token logo.png';
 import BattleIcon from '../assets/swords.png';
 import AntiFire from '../assets/anti fire potion bottle.png';
-import AntiPoison from '../assets/anti poison potion bottle.png';
+import AntiPoison from '../assets/anti poison vial.png';
 import AntiShade from '../assets/anti shade potion bottle.png';
-import Health from '../assets/health potion bottle.png';
+import Health from '../assets/health vial.png';
 import Logo from '../assets/degen age title GNW skull.png';
 import BWLogo from '../assets/degen age logo BNW.jpg';
-import NFT1 from '../assets/knight.png';
-import NFT2 from '../assets/knight 2.jpg';
+import Knight from '../assets/knight 4.png';
+import Wizard from '../assets/wizard compressed.jpg';
+import Elf from '../assets/elf nft.jpg';
+import Goblin from '../assets/goblin compressed.jpg';
 import Button from '@mui/material/Button';
 import '../stylesheet/Bag.css';
 import '../stylesheet/Home.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FormatNumber, getColorLvl } from './../utilities/util';
 import Items from './Items';
+import env from '../../package.json';
 
 const $ = require('jquery');
-require('jquery-ui');
-require('jquery-ui/ui/widgets/sortable');
 
 const ITEMS = [
     {
@@ -66,12 +67,12 @@ const HomeScreen = () => {
                 ...state.player,
                 selected: {
                     ...state.player.selected,
-                    img: NFT1
+                    img: state.player.faction == CHAR_RACES[1] ? Wizard : state.player.faction == CHAR_RACES[2] ? Knight : state.player.faction == CHAR_RACES[0] ? Elf : Goblin
                 }
             })
-            window.onload = () => {
-                $('tbody').sortable();
-            }
+            // window.onload = () => {
+            //     $('tbody').sortable();
+            // }
         }
 
         return () => {
@@ -86,7 +87,8 @@ const HomeScreen = () => {
     const handleBattle = () => {
         navigate('/warroom', {
             state: {
-                player: account
+                player: account,
+                items: ITEMS
             }
         });
     }
@@ -161,12 +163,13 @@ const HomeScreen = () => {
                             <div className='nft-container'>
                                 <div className='nft-wrapper'>
                                     <div className='card-front img-border'>
-                                        <img src={NFT1} width={400}></img>                       
+                                        <img src={account.selected ? account.selected.img : null} width={400}></img>                       
                                     </div> 
                                     <div className='card-back'>
-                                        <h1>STATS</h1>
+                                        <h1 style={{textDecoration: 'underline'}}>STATS</h1>
                                         <div className='text-center'>
                                             <p>Overall: {account.selected ? account.selected.lvl : 0}</p>
+                                            <p>Combat Type: {account.selected ? account.selected.combatType : ''}</p>
                                             <p>Strength: {account.selected ? account.selected.str : 0} </p>
                                             <p>Magic: {account.selected ? account.selected.mgc : 0} </p>
                                             <p>Range: {account.selected ? account.selected.rng : 0} </p>
@@ -186,7 +189,8 @@ const HomeScreen = () => {
                         </div>
                         <Items items={ITEMS} layout="row" />
                     </div>
-                </div>               
+                </div>
+                <label style={{position: 'absolute',right: 0, bottom: 0, zIndex: 100, color: 'white', fontSize: 12, marginRight: 10}}>v{env.version}</label>               
             </div>
         </div>
     )

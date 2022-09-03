@@ -11,7 +11,7 @@
     "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.0.4",
     "@openzeppelin/contracts": "^4.3.2",
-    "@reduxjs/toolkit": "^1.8.4",
+    "@reduxjs/toolkit": "^1.8.5",
     "@sentry/react": "^6.16.1",
     "@sentry/tracing": "^6.16.1",
     "@testing-library/jest-dom": "^5.11.4",

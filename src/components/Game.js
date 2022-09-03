@@ -6,36 +6,22 @@ import ReadyIcon from '@mui/icons-material/ThumbUp';
 import LinearProgress from '@mui/material/LinearProgress';
 import HeartIcon from '@mui/icons-material/Favorite';
 import Modal from '@mui/material/Modal';
-import GameBG from '../assets/ivory hill.jpg';
-import AntiFire from '../assets/anti fire potion bottle.png';
-import AntiPoison from '../assets/anti poison potion bottle.png';
-import AntiShade from '../assets/anti shade potion bottle.png';
-import Health from '../assets/health potion bottle.png';
+import SchillIcon from '../assets/schil token logo.png';
+import IH from '../assets/ivory hill.jpg';
+import EastRun from '../assets/east run wr.jpg';
+import KR from '../assets/kata rhama.jpg';
+import KingsCross from '../assets/kings crossing wr.jpg';
+import BattleIcon from '../assets/swords.png';
+import CPIcon from '@mui/icons-material/Api';
 import '../App.css';
 import '../stylesheet/Sections.css';
 import '../stylesheet/Game.css';
 import { battle, generateCollection, randNum } from '../utilities/mechanics';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Items from './Items';
+import { FormatNumber } from '../utilities/util';
 
-const ITEMS = [
-  {
-      count: 1,
-      img: Health
-  },
-  {
-      count: 2,
-      img: AntiPoison
-  },
-  {
-      count: 1,
-      img: AntiFire
-  },
-  {
-      count: 3,
-      img: AntiShade
-  }
-]
+const CP = 2;
 
 const Game = ({img,game_id}) => {
     const [gameState,setGameState] = useState(false);
@@ -54,7 +40,9 @@ const Game = ({img,game_id}) => {
         let mounted = true;
 
         if(mounted){
+          setTimeout(() => {
             handleCollectionGeneration();
+          },1500);
         }
 
         return () => {
@@ -112,23 +100,57 @@ const Game = ({img,game_id}) => {
       }
 
       const handleGameEnd = () => {
-        navigate('/play');
+        const _balance = state.player.tokens + (winner == 1 ? state.pool : (state.pool * -1));
+        navigate('/play', {
+          state: {
+            player: {
+              ...state.player,
+              tokens: _balance,
+              cp: state.player.cp + winner == 1 ? CP : 0
+            },
+            items: state.items
+          }
+        });
       }
 
     return (
         <div className="main-container parallax-group">
-          <img className='game-bg' src={GameBG} width="100%"></img>
+          <img className='game-bg' src={state.stage == 'ivory-hill' ? IH : state.stage == 'east-run' ? EastRun : state.stage == 'kings-crossing' ? KingsCross : KR} width="100%"></img>
             <div className='inner-main'>
               {loading ?
-              <div className='flex-just-center flex-align-center'>
-                <p>Connecting to War Room...</p>
-                <CircularProgress />
+              <div style={{height: '100%'}} className='flex-just-center flex-align-center flex-column'>
+                <h1>Connecting to War Room...</h1>
+                <CircularProgress style={{color: '#f5deb3'}} />
               </div> :
               <div className='flex-align-center flex-just-between' id="game-board">
                 <Modal open={modalOpen} onClose={toggleModal} aria-labelledby={winner && winner == 1 ? 'You Won!' : 'You Lost'}>
                   <div className='modal-wrapper'>
-                    <h2>Here is some text to display</h2>
-                    <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Leave</Button>
+                    <h1 style={winner == 1 ? {color: 'green'} : {color: 'red'}}>{winner == 1 ? `You Won!` : `Defeat`}</h1>
+                    <h2>{winner == 1 ? `Your Faction Will be Pleased` : `Defeat is unacceptable`}</h2>
+                    {winner == 1 ? <div style={{width: '100%'}} className='flex-align-center flex-just-even'>
+                      <div className="flex-align-center">
+                        <CPIcon style={{fontSize: 40, marginRight: 8}} />
+                        <h1>{CP}</h1>
+                      </div>
+                      <div className="flex-align-center">
+                          <img style={{marginRight: 8, filter: 'invert(1)'}} src={SchillIcon} width={40}></img>
+                          <h1 style={{color: 'green'}}>{`+${FormatNumber(state.pool)}`}</h1>
+                      </div>
+                    </div> :
+                    <div style={{width: '100%'}} className='flex-align-center flex-just-even'>
+                      <div className="flex-align-center">
+                        <CPIcon style={{fontSize: 40, marginRight: 8}} />
+                        <h1>0</h1>
+                      </div>
+                      <div className="flex-align-center">
+                          <img style={{marginRight: 8, filter: 'invert(1)'}} src={SchillIcon} width={40}></img>
+                          <h1 style={{color: 'red'}}>{`-${FormatNumber(state.pool)}`}</h1>
+                      </div>
+                    </div>                    
+                    }
+                    <div className='spacing-small'>
+                      <Button className='primary-wheat' variant="contained" onClick={handleGameEnd}>Home</Button>
+                    </div>
                   </div>
                 </Modal>
                 <Modal open={prep} >
@@ -139,6 +161,7 @@ const Game = ({img,game_id}) => {
                 <Modal open={pregame} >
                   <div className='blnk-modal-wrapper'>
                     <h1>Battle!</h1>
+                    <img style={{filter: 'brightness(0) invert(1)'}} src={BattleIcon} width={64}></img>
                   </div>
                 </Modal>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
@@ -168,7 +191,7 @@ const Game = ({img,game_id}) => {
                     <h3 style={{color: 'springgreen'}} id="player1-health-val">100</h3>
                   </div>  
                   <div>
-                    <Items items={ITEMS} layout="col" />  
+                    <Items items={state.items} layout="col" />  
                   </div>                                  
                 </div>
                 <div id="gameboard-middle" style={{width: '20%'}}>
@@ -178,7 +201,7 @@ const Game = ({img,game_id}) => {
                   </div>
                   <div className='flex-column flex-just-even flex-align-center'>
                     <h2>{winner === 1 ? `You Won!` : winner === 0 ? `Defeat!` : ""}</h2>
-                    {winner ? <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Leave</Button> : null}
+                    {winner ? <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Home</Button> : null}
                   </div>
                   {!ready ? 
                   <div className='spacer flex-just-even flex-align-center'>
@@ -212,7 +235,7 @@ const Game = ({img,game_id}) => {
                       <h2>READY</h2>  
                     </div> : null}
                     <div id="p2-img-wrapper">
-                        <img className='p2-image' id="p2-image" src={players.p2.image} width={400} height={400}></img>                        
+                        <img className='p2-image' id="p2-image" src={players.p2.selected.img} width={400} height={400}></img>                        
                     </div>                    
                   </div>
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>

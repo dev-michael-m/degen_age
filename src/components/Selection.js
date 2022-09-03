@@ -6,6 +6,10 @@ import KnightTitle from '../assets/knights title.png';
 import GoblinTitle from '../assets/goblins title.png';
 import WizardTitle from '../assets/wizards title.png';
 import ElfTitle from '../assets/elves title.png';
+import SorcererShield from '../assets/sorcerers shield item.jpg';
+import Weaken from '../assets/weaken item img.jpg';
+import Barrage from '../assets/barrage item img.jpg';
+import Berserk from '../assets/berserk item img.jpg';
 import {db} from '../firebase/firestore';
 import {addDoc,collection, serverTimestamp} from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -46,17 +50,18 @@ const Selection = () => {
             online: true,
             selected_char: 0,
             selected: {
-                lvl: 0,
-                mgc: 0,
-                str: 0,
-                rng: 0,
-                def: 0
+                combatType: 'MELEE',
+                lvl: 200,
+                mgc: 10,
+                str: 59,
+                rng: 30,
+                def: 101
             },
             time_played: 0,
-            tokens: 0,
+            tokens: 10000,
             total_cp: 0,
             total_earned: 0,
-            user_name: ""
+            user_name: "KingSlayer69"
         }
 
         // set in redux as well****
@@ -82,10 +87,10 @@ const Selection = () => {
             {!initScreen ? <div id="main-select" className='fade-in-slow2 select-wrapper'>
                 <h1 className='text-center'>CHOOSE YOUR SIDE</h1>
                 <div className='select-cards'>
-                    <Card cardStyle="f1" title={WizardTitle} name={1} onClick={handleFactionSelect} />
-                    <Card cardStyle="f3" title={KnightTitle} name={2} onClick={handleFactionSelect} />
-                    <Card cardStyle="f2" title={ElfTitle} name={3} onClick={handleFactionSelect} />
-                    <Card cardStyle="f4" title={GoblinTitle} name={4} onClick={handleFactionSelect} />
+                    <Card cardStyle="f1" ability={SorcererShield} desc="Sorcerers Shield" title={WizardTitle} name={1} onClick={handleFactionSelect} />
+                    <Card cardStyle="f3" ability={Berserk} desc="Berserk" title={KnightTitle} name={2} onClick={handleFactionSelect} />
+                    <Card cardStyle="f2" ability={Barrage} desc="Barrage" title={ElfTitle} name={0} onClick={handleFactionSelect} />
+                    <Card cardStyle="f4" ability={Weaken} desc="Weaken" title={GoblinTitle} name={3} onClick={handleFactionSelect} />
                 </div>
             </div> :
             <div className='fade-in-slow sub-select-wrapper flex-just-center'>
