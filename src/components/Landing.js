@@ -14,6 +14,7 @@ const LORE_LIST = [
   {display: 'Chapt. I - The Origin Story', path: `origins`},
   {display: 'Chapt. II - A Prophecy Untold', path: `prophecy`},
   {display: 'Chapt. III - Rise of the Elven King', path: `elven king`},
+  {display: 'Chapt. IV - Ponder of Power', path: `knight king`}
 ]
 
 const Landing = () => {

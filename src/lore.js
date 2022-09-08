@@ -1,6 +1,7 @@
 import CrystalImg from './assets/crystal cavern full.jpg';
 import BookImg from './assets/books promo.png';
 import ElveSword from './assets/elven sword.jpg';
+import KnightKing from './assets/knight king.png';
 
 export const LORE = [
   {
@@ -128,6 +129,80 @@ The prince's voice was cold and bitter. He observed the elven blade. As the king
 
 The prince walked out of the room bloody and emotionless. It was his time to rule.
 
+    `
+  },
+  {
+    path: "knight king",
+    title: `Chapt. IV - Ponder of Power`,
+    img: KnightKing,
+    size: '50%',
+    text: `
+    Darkness rose from the horizon. The taste of blood through every breath. Power surging through the veins of a warrior, an outcast. He did not hold back this time. His opponent was destroyed in a flash. 
+The warrior showed no mercy. Rage, anger, focus, energy. All emotions at once. Using his forbidden powers, he felt like a god, a deity. Nothing could stop him. No more witnesses, no more knowledge of him ever being an outcast.
+
+
+“My King, we've lost our left flank!” 
+
+“Come again?”, the king questioned his general. 
+
+“We managed to find a single survivor.” 
+
+“Bring him to me, and general?”, the king asked. 
+
+“Yes milord?” 
+
+“Try to keep peace with him.” 
+
+“As you wish, sire.” 
+
+The General gestured for his men to bring the survivor into the tent. 
+
+“Here he is, sire. He hasn't said a word since”, the general proclaimed. 
+“Hmm, it seems he is in shock. Do you know where you are?”, the king asked patiently. 
+
+The survivor looked up at the king and nodded, “Yes”.
+
+“Good, do you know who I am?” 
+
+This time the aura of the survivor had changed. The air went cold. The survivor answered. 
+
+“Dead.” 
+
+A few days had passed since the massacre of King Norvack and his army. The survivor continued his warpath and ended up in a distant town.
+
+“Where did you say you were from?”, a barkeep asked. 
+
+“Beyond the mountains of Lydura.” 
+
+“Lydura? Haven't heard that name for many moons. Those lands were once ruled by House Brakka. One of the last houses that came from Brakkaria. Before they became a myth of course.” 
+
+“Those Brakkarians, letting a prophecy destroy a whole civilization.”, the barkeep said. 
+
+“True.”, the patron responded while taking a swig of his ale. 
+
+“The prophecy hasn't come true yet. It is said that a son from House Brakka would rule a far away city.” 
+
+“Huh, I never heard that part of the story.”, the barkeep said. 
+
+“Well lad, would love to chat more, but I have more patrons to serve. Good luck to you and enjoy the rest of your stay, cheers!”
+
+The patron finishes his ale, tosses a few schill on the bar top, and walks outside. The night was pitch black. 
+
+He stares up into the night sky and takes a deep breath, “Now, let's get this party started.” 
+
+The patron lights a torch and throws it up into the air.
+
+“That's the signal, let's go.” 
+
+Soldiers surrounded the tavern. The patron went back inside and found the barkeep prepared to fight, wielding a sword and armor.  
+
+“I am impressed it took you this long to find me.” 
+
+“Your days of hiding are over!”, the patron yelled as he pulled out his sword.
+
+“This is just the beginning, and that prophecy, let's just say it's already in motion.” 
+
+The sword lit up with a dark blue aura. The Knight King's reign of power had just begun…
     `
   }
 ];
