@@ -25,8 +25,10 @@ import '../stylesheet/Bag.css';
 import '../stylesheet/Home.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FormatNumber, getColorLvl } from './../utilities/util';
+import {useSelector, useDispatch} from 'react-redux';
 import Items from './Items';
 import env from '../../package.json';
+import { selectPlayer, setItems, setPlayerImg } from './../store/playerSlice';
 
 const $ = require('jquery');
 
@@ -50,8 +52,9 @@ const ITEMS = [
 ]
 
 const HomeScreen = () => {
-    const {state} = useLocation();
     const navigate = useNavigate();
+    const player = useSelector(selectPlayer);
+    const dispatch = useDispatch();
 
     const [headerMsg,setHeaderMsg] = useState(`
         Welcome to Degen Age! The metaverse's first online NFT game...
@@ -59,15 +62,33 @@ const HomeScreen = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [account,setAccount] = useState({});
 
+    console.log({player});
     useEffect(() => {
         let mounted = true;
 
+        function beforeUnloadListener(event){
+            sessionStorage.setItem('reloaded','true');  // set var if player is refreshing
+        }
+
         if(mounted){
+            const reloaded = sessionStorage.getItem('reloaded');
+            
+            window.addEventListener('beforeunload',beforeUnloadListener,{capture: true});
+            
+            if(reloaded){
+                // get player data
+                sessionStorage.removeItem('reloaded');
+            }
+
+            dispatch(setPlayerImg(
+                player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
+            ));
+
             setAccount({
-                ...state.player,
+                ...player,
                 selected: {
-                    ...state.player.selected,
-                    img: state.player.faction == CHAR_RACES[1] ? Wizard : state.player.faction == CHAR_RACES[2] ? Knight : state.player.faction == CHAR_RACES[0] ? Elf : Goblin
+                    ...player.selected,
+                    img: player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
                 }
             })
             // window.onload = () => {
@@ -77,6 +98,7 @@ const HomeScreen = () => {
 
         return () => {
             mounted = false;
+            window.removeEventListener('beforeunload',beforeUnloadListener,{capture: true});
         }
     },[]);
 
@@ -85,16 +107,15 @@ const HomeScreen = () => {
     }
 
     const handleBattle = () => {
-        navigate('/warroom', {
-            state: {
-                player: account,
-                items: ITEMS
-            }
-        });
+        dispatch(setItems([
+            ...ITEMS
+        ]));
+
+        navigate('/warroom');
     }
 
     return (
-        <div id="home-container" className={`home-container ${account.faction}`}>
+        <div id="home-container" className={`home-container ${player.faction}`}>
             <div id="home-inner-container" className='home-inner-container'>
                 <Drawer
                     anchor='left'
@@ -145,11 +166,11 @@ const HomeScreen = () => {
                         <div className='flex-just-even' style={{width: 250}}>
                             <div style={{marginRight: 28, width: 80}} id="campaign-points" className='flex-just-even flex-align-center'>
                                 <CPIcon style={{color: 'floralwhite', fontSize: 18, marginRight: 8}} />
-                                <label className={`top-bar-label-cp ${account.cp >= 1e6 && account.cp < 1e9 ? 'label-green' : account.cp >= 1e9 && account.cp < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(account.cp)}</label>
+                                <label className={`top-bar-label-cp ${player.cp >= 1e6 && player.cp < 1e9 ? 'label-green' : player.cp >= 1e9 && player.cp < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(player.cp)}</label>
                             </div>
                             <div style={{width: 80}} id="schills" className='flex-just-even flex-align-center'>
                                 <img style={{marginRight: 8}} src={SchillIcon} width={20}></img>
-                                <label className={`top-bar-label-sch ${account.tokens >= 1e6 && account.tokens < 1e9 ? 'label-green' : account.tokens >= 1e9 && account.tokens < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(account.tokens)}</label>
+                                <label className={`top-bar-label-sch ${player.tokens >= 1e6 && player.tokens < 1e9 ? 'label-green' : player.tokens >= 1e9 && player.tokens < 1e12 ? 'label-orange' : ''}`}>{FormatNumber(player.tokens)}</label>
                             </div>
                         </div>
                     </div>                    
@@ -158,22 +179,22 @@ const HomeScreen = () => {
                     <div className='home-primary-wrapper'>
                         <div className='flex-column flex-align-center'>
                             <div>
-                                <h2 style={{color: getColorLvl(account.selected ? account.selected.lvl : 0)}}>(Lvl. {account.selected ? account.selected.lvl : 0})</h2>
+                                <h2 style={{color: getColorLvl(player.selected ? player.selected.lvl : 0)}}>(Lvl. {player.selected ? player.selected.lvl : 0})</h2>
                             </div>
                             <div className='nft-container'>
                                 <div className='nft-wrapper'>
                                     <div className='card-front img-border'>
-                                        <img src={account.selected ? account.selected.img : null} width={400}></img>                       
+                                        <img src={player.selected && account.selected ? account.selected.img : null} width={400}></img>                       
                                     </div> 
                                     <div className='card-back'>
                                         <h1 style={{textDecoration: 'underline'}}>STATS</h1>
                                         <div className='text-center'>
-                                            <p>Overall: {account.selected ? account.selected.lvl : 0}</p>
-                                            <p>Combat Type: {account.selected ? account.selected.combatType : ''}</p>
-                                            <p>Strength: {account.selected ? account.selected.str : 0} </p>
-                                            <p>Magic: {account.selected ? account.selected.mgc : 0} </p>
-                                            <p>Range: {account.selected ? account.selected.rng : 0} </p>
-                                            <p>Defense: {account.selected ? account.selected.def : 0} </p>
+                                            <p>Overall: {player.selected ? player.selected.lvl : 0}</p>
+                                            <p>Combat Type: {player.selected ? player.selected.combatType : ''}</p>
+                                            <p>Strength: {player.selected ? player.selected.str : 0} </p>
+                                            <p>Magic: {player.selected ? player.selected.mgc : 0} </p>
+                                            <p>Range: {player.selected ? player.selected.rng : 0} </p>
+                                            <p>Defense: {player.selected ? player.selected.def : 0} </p>
                                         </div>
                                     </div>
                                 </div>

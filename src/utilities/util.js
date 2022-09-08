@@ -1,5 +1,7 @@
 import {ethers} from 'ethers';
 import {LVLS} from '../constants';
+import {collection, query, where, getDocs} from 'firebase/firestore';
+import { db } from '../firebase/firestore';
 
 export const FormatNumber = (_num) => {
     const _parsed = parseInt(_num);
@@ -13,6 +15,18 @@ const truncate = (_num) => {
     let step = Math.pow(10,2 || 0);
     let temp = Math.trunc(step * _num);
     return temp / step;
+}
+
+export const getPlayer = (_address) => {
+    return new Promise(async(resolve,reject) => {
+        try {
+            const _query = await getDocs(query(collection(db, 'players'), where("address","==",_address)));
+            resolve({data: _query});
+        } catch (error) {
+            console.error(`util.getPlayer: ${error}`);
+            reject({data: false, msg: error});
+        }
+    })
 }
 
 export const ConnectWallet = async () => {

@@ -4,13 +4,16 @@ import Button from '@mui/material/Button';
 import '../stylesheet/Landing.css';
 import {db} from '../firebase/firestore';
 import {collection, query, where, getDocs, doc} from 'firebase/firestore';
-import { ConnectWallet } from '../utilities/util';
+import { ConnectWallet, getPlayer } from '../utilities/util';
 import { useNavigate } from 'react-router-dom';
 import { CHAR_RACES } from './../constants';
+import {useDispatch} from 'react-redux';
+import {setInit} from '../store/playerSlice';
 
 const Landing = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(`
@@ -29,22 +32,20 @@ const Landing = () => {
     const onConnect = () => {
       ConnectWallet().then(async (res) => {
         if(res.status && res.status == 'success'){  // must determine if this is returning player or not
-          const _query = await getDocs(query(collection(db, 'players'), where("address","==",res.address)));
+          const _query = await getPlayer(res.address);
           
-          if(_query.empty){ // player does not exist
+          if(_query.data && _query.data.empty){ // player does not exist
             // new player
             navigate('/select', {state: {address: res.address}});
           }else{
-            const playerData = _query.docs[0].data();
-            
-            navigate('/play', {
-              state: {
-                player: {
-                  ...playerData,
-                  faction: CHAR_RACES[playerData.faction]
-                }
-              }
-            })
+            const playerData = _query.data.docs[0].data();
+            dispatch(setInit({  
+              ...playerData,
+              created: new Date().getTime(),
+              faction: CHAR_RACES[playerData.faction]
+            }));
+
+            navigate('/play');
           }          
         }
       }).catch(error => {

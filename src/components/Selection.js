@@ -14,12 +14,17 @@ import {db} from '../firebase/firestore';
 import {addDoc,collection, serverTimestamp} from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {CHAR_RACES} from '../constants';
+import {useSelector, useDispatch} from 'react-redux';
+import {setInit, selectPlayer} from '../store/playerSlice';
 
 const SCREEN_DELAY = 4000; // delay in ms
 
 const Selection = () => {
     const [initScreen, setInitScreen] = useState(true);
+    const player = useSelector(selectPlayer);  
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [ready,setReady] = useState(false);
     const {state} = useLocation();
 
     useEffect(() => {
@@ -39,7 +44,7 @@ const Selection = () => {
     const handleFactionSelect = async (_faction) => {
         // add new player to db
         const ref = collection(db, 'players');
-        const playerData = {
+        let playerData = {
             address: state.address,
             cp: 0,
             created: serverTimestamp(),
@@ -51,11 +56,11 @@ const Selection = () => {
             selected_char: 0,
             selected: {
                 combatType: 'MELEE',
-                lvl: 200,
+                lvl: 181,
                 mgc: 10,
                 str: 59,
                 rng: 30,
-                def: 101
+                def: 82
             },
             time_played: 0,
             tokens: 10000,
@@ -64,18 +69,16 @@ const Selection = () => {
             user_name: "KingSlayer69"
         }
 
+        dispatch(setInit({
+            ...playerData,
+            created: new Date().getTime(),
+            faction: CHAR_RACES[playerData.faction]
+        }));
+
         // set in redux as well****
         addDoc(ref,playerData).then(res => {
             if(res.id){
-                const _faction = CHAR_RACES[playerData.faction];
-                navigate('/play',{
-                    state: {
-                        player: {
-                            ...playerData,
-                            faction: _faction
-                        }
-                    }
-                });
+                navigate('/play');
             }
         }).catch(error => {
             console.error(error);

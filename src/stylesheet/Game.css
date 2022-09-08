@@ -14,8 +14,26 @@
     position: relative;
 }
 
+.game {
+  font-size: 30px;
+  margin: 0px;
+  padding-top: 10px;
+  text-align: center;
+}
+
 .spacer {
   margin: 35px 0px;
+}
+
+.spacer-top {
+  margin-top: 10px;
+}
+
+.timer {
+  font-size: 30px;
+  text-align: center;
+  margin: 0px;
+  padding-top: 10px;
 }
 
 .game-bg {

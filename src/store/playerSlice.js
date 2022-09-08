@@ -1,11 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice,current} from '@reduxjs/toolkit';
 
 export const playerSlice = createSlice({
     name: 'player',
     initialState: {
         address: '',
         cp: 0,
-        created: null,
+        created: '',
         faction: 0,
         faction_selected: false,
         games_lost: 0,
@@ -13,7 +13,8 @@ export const playerSlice = createSlice({
         online: false,
         selected_char: 0,
         selected: {
-            combatType: null,
+            combatType: '',
+            img: '',
             lvl: 0,
             mgc: 0,
             str: 0,
@@ -24,11 +25,12 @@ export const playerSlice = createSlice({
         tokens: 10000,
         total_cp: 0,
         total_earned: 0,
-        user_name: ""
+        items: [],
+        user_name: "KingSlayer69"
     },
     reducers: {
         setInit: (state,action) => {
-            state = {...action.payload}
+            return action.payload;
         },
         setCP: (state,action) => {
             state.cp += action.payload;
@@ -40,7 +42,25 @@ export const playerSlice = createSlice({
             state.games_lost = action.payload;
         },
         setGamesWon: (state,action) => {
-            
+            state.games_won = action.payload;
+        },
+        setPlayerState: (state,action) => {
+            return {
+                ...state,
+                ...action.payload
+            }
+        },
+        setItems: (state,action) => {
+            state.items = [...action.payload];
+        },
+        setPlayerImg: (state,action) => {
+            state.selected.img = action.payload;
         }
     }
-})
+});
+
+export const {setPlayerImg, setItems, setInit, setCP, setFaction, setGamesLost, setGamesWon, setPlayerState} = playerSlice.actions;
+
+export const selectPlayer = (state) => state.player;
+
+export default playerSlice.reducer;

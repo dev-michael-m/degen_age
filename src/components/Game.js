@@ -20,11 +20,15 @@ import { battle, generateCollection, randNum } from '../utilities/mechanics';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Items from './Items';
 import { FormatNumber } from '../utilities/util';
+import { useSelector } from 'react-redux';
+import { selectPlayer } from '../store/playerSlice';
 
 const CP = 2;
+const MINS = 2;
+const FAIL_STATE = -999;
 
 const Game = ({img,game_id}) => {
-    const [gameState,setGameState] = useState(false);
+    const [gameState,setGameState] = useState(false); // if state is < 0, player took to long to ready up
     const [players,setPlayers] = useState({});
     const [winner,setWinner] = useState(false);
     const [loading,setLoading] = useState(true);
@@ -34,6 +38,7 @@ const Game = ({img,game_id}) => {
     const [ready,setReady] = useState(false);
     const [modalOpen,setModalOpen] = useState(false);
     const navigate = useNavigate();
+    const player = useSelector(selectPlayer);
     const {state} = useLocation();
 
     useEffect(() => {
@@ -42,13 +47,45 @@ const Game = ({img,game_id}) => {
         if(mounted){
           setTimeout(() => {
             handleCollectionGeneration();
-          },1500);
+            handleTimerStart();
+          },2000);
         }
 
         return () => {
             mounted = false;
         }
     },[]);
+
+    const handleTimerStart = () => {
+      const countDown = new Date();
+      countDown.setMinutes(countDown.getMinutes() + MINS);
+      let colored = false;
+
+      let timer = setInterval(() => {
+        const now = new Date().getTime();
+
+        const distance = countDown.getTime() - now;
+
+        const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').innerHTML = `${mins}:${secs.toString().padStart(2,'0')}`;
+
+        if(ready){
+          clearInterval(timer);
+        }
+
+        if(distance < 0){
+          clearInterval(timer);
+          setGameState(FAIL_STATE);
+          document.getElementById('timer').innerHTML = `Time's Up!`;
+        }
+
+        if(distance < 60000 && !colored){
+          document.getElementById('timer').style.color = 'red';
+        }
+      }, 1000);
+    }
 
     const toggleModal = () => {
       setModalOpen(prevState => !prevState);
@@ -77,7 +114,7 @@ const Game = ({img,game_id}) => {
         setPregame(false);
 
         if(Object.keys(players).length){
-          const status = await battle(state.player, players.p2);
+          const status = await battle(player, players.p2);
           setWinner(status.winner);
 
           if(status.winner == 1){
@@ -100,13 +137,13 @@ const Game = ({img,game_id}) => {
       }
 
       const handleGameEnd = () => {
-        const _balance = state.player.tokens + (winner == 1 ? state.pool : (state.pool * -1));
+        const _balance = player.tokens + (winner == 1 ? state.pool : (state.pool * -1));
         navigate('/play', {
           state: {
             player: {
-              ...state.player,
+              ...player,
               tokens: _balance,
-              cp: state.player.cp + winner == 1 ? CP : 0
+              cp: player.cp + winner == 1 ? CP : 0
             },
             items: state.items
           }
@@ -166,8 +203,8 @@ const Game = ({img,game_id}) => {
                 </Modal>
                 <div className='flex-align-center flex-column' style={{width: '40%'}}>
                   <div className='text-center'>
-                    <h3 style={{color: 'gold'}}>{state.player.user_name}</h3>
-                    <h3 style={{color: 'gold'}}>(Lvl. {state.player.selected.lvl})</h3>
+                    <h3 style={{color: 'gold'}}>{player.user_name}</h3>
+                    <h3 style={{color: 'gold'}}>(Lvl. {player.selected.lvl})</h3>
                   </div>
                   <div className='float-small'>
                     <div className='hit-marker-container-right' id="hit-marker-container">
@@ -183,7 +220,7 @@ const Game = ({img,game_id}) => {
                       <h2 id="p1-defeat">DEFEAT</h2>  
                     </div> 
                     <div id="p1-img-wrapper">
-                        <img className='p1-image' id="p1-image" src={state.player.selected.img} width={400} height={400}></img>                        
+                        <img className='p1-image' id="p1-image" src={player.selected.img} width={400} height={400}></img>                        
                     </div>                  
                   </div>
                   <div className='flex-align-center flex-just-around' style={{width: '75%'}}>
@@ -191,7 +228,7 @@ const Game = ({img,game_id}) => {
                     <h3 style={{color: 'springgreen'}} id="player1-health-val">100</h3>
                   </div>  
                   <div>
-                    <Items items={state.items} layout="col" />  
+                    <Items items={player.items} layout="col" />  
                   </div>                                  
                 </div>
                 <div id="gameboard-middle" style={{width: '20%'}}>
@@ -199,12 +236,15 @@ const Game = ({img,game_id}) => {
                     <textarea className='game-log' id="game-log"></textarea>
                     <div className='fade-overlay'></div>
                   </div>
+                  {!ready ? <div>
+                    <p className='timer' id="timer"></p>
+                  </div> : null}
                   <div className='flex-column flex-just-even flex-align-center'>
                     <h2>{winner === 1 ? `You Won!` : winner === 0 ? `Defeat!` : ""}</h2>
                     {winner ? <Button className='primary-white' variant="contained" onClick={handleGameEnd}>Home</Button> : null}
                   </div>
                   {!ready ? 
-                  <div className='spacer flex-just-even flex-align-center'>
+                  <div className='spacer-top flex-just-even flex-align-center'>
                     <Button className='primary-white' variant="contained" onClick={handleGameState}>
                         <div className='flex-just-even flex-align-center' style={{width: 150}}>
                             <div style={{paddingTop: 4}}>Ready</div>

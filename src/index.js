@@ -14,19 +14,23 @@ import {
 } from 'react-router-dom';
 import WarRoom from './components/WarRoom';
 import Game from './components/Game';
+import store from './store/index';
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/play/battle/:id" element={<Game />} />
-        <Route exact path="/play" element={<HomeScreen />} />
-        <Route exact path="/warroom" element={<WarRoom />} />
-        <Route exact path="/marketplace" element={<MarketPlace />} />
-        <Route exact path="/select" element={<Selection />} />
-        <Route exact path="/" element={<Landing />} />
-      </Routes>
-    </Router>    
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/play/battle/:id" element={<Game />} />
+          <Route exact path="/play" element={<HomeScreen />} />
+          <Route exact path="/warroom" element={<WarRoom />} />
+          <Route exact path="/marketplace" element={<MarketPlace />} />
+          <Route exact path="/select" element={<Selection />} />
+          <Route exact path="/" element={<Landing />} />
+        </Routes>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
