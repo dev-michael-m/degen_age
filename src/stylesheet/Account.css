@@ -1,0 +1,49 @@
+.account-container {
+    height: 100vh;
+    width: 100%;    
+}
+
+.account-wrapper {
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.account-inner {
+    padding: 32px;
+}
+
+.char-select img {
+    width: 200px;
+    opacity: 0.5;
+}
+
+.char-select img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.char-selected img {
+    opacity: 1;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+.account-title-left {
+    width: 100%;
+    margin-left: 40px;
+}
+
+.account-title-right {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.account-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}

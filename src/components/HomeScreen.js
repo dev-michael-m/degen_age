@@ -114,6 +114,10 @@ const HomeScreen = () => {
         navigate('/warroom');
     }
 
+    const handleAccount = () => {
+        navigate('/account');
+    }
+
     return (
         <div id="home-container" className={`home-container ${player.faction}`}>
             <div id="home-inner-container" className='home-inner-container'>
@@ -140,7 +144,7 @@ const HomeScreen = () => {
                             </div>
                             <div style={{width: '80%'}} className='flex-align-center side-nav-wrapper'>
                                 <AccountIcon style={{marginRight: 20}} />
-                                <a className='drawer-link' id="team" href="#">Account</a>                             
+                                <a className='drawer-link' id="team" href="#" onClick={handleAccount}>Account</a>                             
                             </div>
                             <div style={{width: '80%'}} className='flex-align-center disabled-link'>
                                 <FortIcon className='disabled-link' style={{marginRight: 20}} />

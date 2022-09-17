@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Logo from '../assets/degen age logo BNW.jpg';
-import Button from '@mui/material/Button';
+import Button from './Button';
 import '../stylesheet/Landing.css';
 import {db} from '../firebase/firestore';
 import {collection, query, where, getDocs, doc} from 'firebase/firestore';
@@ -65,8 +65,8 @@ const Landing = () => {
           <div className='typewriter'>
             <h2>Are you ready?</h2>
           </div>
-          <div style={{margin: 40}}>
-            <Button className='primary-white' variant="contained" onClick={onConnect}>Play</Button>
+          <div className='spacing-small' style={{margin: 40}}>
+            <Button onClick={onConnect}>play degen age</Button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import {ethers} from 'ethers';
 import {LVLS} from '../constants';
-import {collection, query, where, getDocs} from 'firebase/firestore';
+import {collection, query, where, getDocs, doc, updateDoc} from 'firebase/firestore';
 import { db } from '../firebase/firestore';
 
 export const FormatNumber = (_num) => {
@@ -24,6 +24,38 @@ export const getPlayer = (_address) => {
             resolve({data: _query});
         } catch (error) {
             console.error(`util.getPlayer: ${error}`);
+            reject({data: false, msg: error});
+        }
+    })
+}
+
+export const getUsername = (_username) => {
+    return new Promise(async(resolve,reject) => {
+        try {
+            const _query = await getDocs(query(collection(db, 'players'), where("user_name","==",_username)));
+            resolve({data: _query});
+        } catch (error) {
+            console.error(`util.getUsername: ${error}`);
+            reject({data: false, msg: error});
+        }
+    })
+}
+
+export const setPlayerUsername = (_username,_address) => {
+    return new Promise(async(resolve,reject) => {
+        try {
+            const dbRef = await getDocs(query(collection(db, 'players'), where("address","==",_address)));
+            
+            if(!dbRef.empty){
+                const _id = dbRef.docs[0].id;
+                const playerRef = doc(db,'players',_id);
+                await updateDoc(playerRef, {
+                    user_name: _username
+                });
+                resolve({data: true});
+            }
+        } catch (error) {
+            console.error(`util.setPlayerUsername: ${error}`);
             reject({data: false, msg: error});
         }
     })

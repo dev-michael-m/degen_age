@@ -16,6 +16,7 @@ import WarRoom from './components/WarRoom';
 import Game from './components/Game';
 import store from './store/index';
 import {Provider} from 'react-redux';
+import Account from './components/Account';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.render(
           <Route exact path="/warroom" element={<WarRoom />} />
           <Route exact path="/marketplace" element={<MarketPlace />} />
           <Route exact path="/select" element={<Selection />} />
+          <Route exact path="/account" element={<Account />} />
           <Route exact path="/" element={<Landing />} />
         </Routes>
       </Router>

@@ -40,28 +40,19 @@ const Game = ({img,game_id}) => {
     const navigate = useNavigate();
     const player = useSelector(selectPlayer);
     const {state} = useLocation();
+    let timer;
 
     useEffect(() => {
-        let mounted = true;
-
-        if(mounted){
-          setTimeout(() => {
-            handleCollectionGeneration();
-            handleTimerStart();
-          },2000);
-        }
-
-        return () => {
-            mounted = false;
-        }
-    },[]);
-
-    const handleTimerStart = () => {
+      (async () => {
+        await handleSleep();
+      })();
+        
       const countDown = new Date();
       countDown.setMinutes(countDown.getMinutes() + MINS);
       let colored = false;
 
-      let timer = setInterval(() => {
+      timer = setInterval(() => {
+        console.log("calling interval");
         const now = new Date().getTime();
 
         const distance = countDown.getTime() - now;
@@ -69,22 +60,39 @@ const Game = ({img,game_id}) => {
         const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('timer').innerHTML = `${mins}:${secs.toString().padStart(2,'0')}`;
+        document.getElementById("timer").innerHTML = `${mins}:${secs
+          .toString()
+          .padStart(2, "0")}`;
 
-        if(ready){
+        if (ready) {
+          console.log("clearing timer");
           clearInterval(timer);
         }
 
-        if(distance < 0){
+        if (distance < 0 && !ready) {
+          console.log("inside distance");
           clearInterval(timer);
           setGameState(FAIL_STATE);
-          document.getElementById('timer').innerHTML = `Time's Up!`;
+          document.getElementById("timer").innerHTML = `Time's Up!`;
         }
 
-        if(distance < 60000 && !colored){
-          document.getElementById('timer').style.color = 'red';
+        if (distance < 60000 && !colored && !ready) {
+          console.log("inside colored");
+          document.getElementById("timer").style.color = "red";
         }
       }, 1000);
+        return () => {
+            clearInterval(timer)
+        }
+    },[]);
+
+    const handleSleep = () => {
+      return new Promise((resolve,reject) => {
+        setTimeout(() => {
+          handleCollectionGeneration();
+          resolve(true);
+        }, 2000);
+      })
     }
 
     const toggleModal = () => {
@@ -134,6 +142,10 @@ const Game = ({img,game_id}) => {
         const _p2 = randNum(0,_collection.length);
         setPlayers({p1: _collection[_p1], p2: _collection[_p2]});
         setLoading(false);
+      }
+
+      const setTimer = () => {
+        
       }
 
       const handleGameEnd = () => {

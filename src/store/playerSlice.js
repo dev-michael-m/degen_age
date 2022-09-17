@@ -55,11 +55,14 @@ export const playerSlice = createSlice({
         },
         setPlayerImg: (state,action) => {
             state.selected.img = action.payload;
+        },
+        setUserName: (state,action) => {
+            state.user_name = action.payload;
         }
     }
 });
 
-export const {setPlayerImg, setItems, setInit, setCP, setFaction, setGamesLost, setGamesWon, setPlayerState} = playerSlice.actions;
+export const {setUserName, setPlayerImg, setItems, setInit, setCP, setFaction, setGamesLost, setGamesWon, setPlayerState} = playerSlice.actions;
 
 export const selectPlayer = (state) => state.player;
 
