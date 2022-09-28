@@ -2,6 +2,7 @@ import CrystalImg from './assets/crystal cavern full.jpg';
 import BookImg from './assets/books promo.png';
 import ElveSword from './assets/elven sword.jpg';
 import KnightKing from './assets/knight king.png';
+import ShardOrigin from './assets/shard promo.png';
 
 export const LORE = [
   {
@@ -203,6 +204,23 @@ Soldiers surrounded the tavern. The patron went back inside and found the barkee
 “This is just the beginning, and that prophecy, let's just say it's already in motion.” 
 
 The sword lit up with a dark blue aura. The Knight King's reign of power had just begun…
+    `
+  },
+  {
+    path: "mysterious power",
+    title: `Chapt. V - A Mysterious Power`,
+    img: ShardOrigin,
+    size: '50%',
+    text: `||Archive: XI pg.19 from the athenaeum of Midrah||
+
+
+…After the blast of the great crystal, talk came from all across Seridyl of townsfolk stumbling upon glowing rock like material scattered across their land.  No one knew what they were or where they came from, except the few members present during the ritual under the citadel.
+    
+Most of the townsfolk kept these relics and hid them away from the outside world, while others sold them to merchants for small amounts of SCHIL.  The leaders of the four factions sought out these mysterious materials in hopes to garner the power from within.  Towns were raided and destroyed as the hunt continued for this precious material.
+    
+As more material was gathered, leaders soon realized there were more than one type of “shard”.  Obtaining multiple shards seemed to [REDACTED], especially if they were of the same type.
+    
+Word quickly spread across Seridyl of one man who was able to successfully [REDACTED].  Unfortunately, no one ever saw him after that…
     `
   }
 ];
