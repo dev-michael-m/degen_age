@@ -2,13 +2,16 @@ import React, {useEffect} from 'react';
 import '../stylesheet/WarRoom.css';
 import SchillIcon from '../assets/schil token logo.png';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LockedIcon from '@mui/icons-material/Lock';
-import { selectPlayer } from './../store/playerSlice';
+import { selectPlayer, setInit } from './../store/playerSlice';
+import { getPlayerData } from '../utilities/util';
+import { CHAR_RACES } from './../constants';
 
 const WarRoom = () => {
     const navigate = useNavigate();
     const player = useSelector(selectPlayer);
+    const dispatch = useDispatch();
     const {state} = useLocation();
 
     useEffect(() => {
@@ -20,12 +23,28 @@ const WarRoom = () => {
         
         if(mounted){
             const reloaded = sessionStorage.getItem('reloaded');
-            
+            const padd = localStorage.getItem('padd');
+
             window.addEventListener('beforeunload',beforeUnloadListener,{capture: true});
             
-            if(reloaded){
-                // get player data
+            const retrieveData = async (_address) => {
+                const _query = await getPlayerData(_address);
+                // set player data
+                if(_query.data && !_query.data.empty){
+                    const playerData = _query.data.docs[0].data();
+                    
+                    dispatch(setInit({  
+                        ...playerData,
+                        created: playerData.created.seconds,
+                        faction: CHAR_RACES[playerData.faction]
+                    }));
+                }
+            }
+
+            if(reloaded && padd){   // player has requested a page refresh
                 sessionStorage.removeItem('reloaded');
+                retrieveData(padd)
+                .catch(error => console.error(error));
             }
         }
 

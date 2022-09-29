@@ -24,11 +24,11 @@ import Button from '@mui/material/Button';
 import '../stylesheet/Bag.css';
 import '../stylesheet/Home.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FormatNumber, getColorLvl } from './../utilities/util';
+import { FormatNumber, getColorLvl, getPlayerData } from './../utilities/util';
 import {useSelector, useDispatch} from 'react-redux';
 import Items from './Items';
 import env from '../../package.json';
-import { selectPlayer, setItems, setPlayerImg } from './../store/playerSlice';
+import { selectPlayer, setItems, setPlayerImg, setInit } from './../store/playerSlice';
 
 const $ = require('jquery');
 
@@ -55,14 +55,13 @@ const HomeScreen = () => {
     const navigate = useNavigate();
     const player = useSelector(selectPlayer);
     const dispatch = useDispatch();
-
+    
     const [headerMsg,setHeaderMsg] = useState(`
         Welcome to Degen Age! The metaverse's first online NFT game...
     `)
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [account,setAccount] = useState({});
 
-    console.log({player});
     useEffect(() => {
         let mounted = true;
 
@@ -72,28 +71,51 @@ const HomeScreen = () => {
 
         if(mounted){
             const reloaded = sessionStorage.getItem('reloaded');
-            
+            const padd = localStorage.getItem('padd');
+
             window.addEventListener('beforeunload',beforeUnloadListener,{capture: true});
-            
-            if(reloaded){
-                // get player data
-                sessionStorage.removeItem('reloaded');
+
+            const retrieveData = async (_address) => {
+                const _query = await getPlayerData(_address);
+                // set player data
+                if(_query.data && !_query.data.empty){
+                    const playerData = _query.data.docs[0].data();
+                    
+                    dispatch(setInit({  
+                        ...playerData,
+                        created: playerData.created.seconds,
+                        faction: CHAR_RACES[playerData.faction],
+                        items: ITEMS
+                    }));
+
+                    setAccount({
+                        ...playerData,
+                        selected: {
+                            ...playerData.selected,
+                            img: CHAR_RACES[playerData.faction] == CHAR_RACES[1] ? Wizard : CHAR_RACES[playerData.faction] == CHAR_RACES[2] ? Knight : CHAR_RACES[playerData.faction] == CHAR_RACES[0] ? Elf : Goblin
+                        }
+                    })
+                }
             }
 
-            dispatch(setPlayerImg(
-                player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
-            ));
-
-            setAccount({
-                ...player,
-                selected: {
-                    ...player.selected,
-                    img: player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
-                }
-            })
-            // window.onload = () => {
-            //     $('tbody').sortable();
-            // }
+            if(reloaded && padd){   // player has requested a page refresh
+                sessionStorage.removeItem('reloaded');
+                retrieveData(padd)
+                .catch(error => console.error(error));
+            }else if(!reloaded && padd){    // player has not refreshed page
+                sessionStorage.removeItem('reloaded');
+                dispatch(setPlayerImg(
+                    player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
+                ));
+    
+                setAccount({
+                    ...player,
+                    selected: {
+                        ...player.selected,
+                        img: player.faction == CHAR_RACES[1] ? Wizard : player.faction == CHAR_RACES[2] ? Knight : player.faction == CHAR_RACES[0] ? Elf : Goblin
+                    }
+                })
+            }
         }
 
         return () => {
@@ -107,9 +129,7 @@ const HomeScreen = () => {
     }
 
     const handleBattle = () => {
-        dispatch(setItems([
-            ...ITEMS
-        ]));
+        dispatch(setItems(ITEMS));
 
         navigate('/warroom');
     }

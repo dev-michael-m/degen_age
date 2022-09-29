@@ -4,7 +4,7 @@ import Button from './Button';
 import '../stylesheet/Landing.css';
 import {db} from '../firebase/firestore';
 import {collection, query, where, getDocs, doc} from 'firebase/firestore';
-import { ConnectWallet, getPlayer } from '../utilities/util';
+import { ConnectWallet, getPlayerData } from '../utilities/util';
 import { useNavigate } from 'react-router-dom';
 import { CHAR_RACES } from './../constants';
 import {useDispatch} from 'react-redux';
@@ -32,12 +32,13 @@ const Landing = () => {
     const onConnect = () => {
       ConnectWallet().then(async (res) => {
         if(res.status && res.status == 'success'){  // must determine if this is returning player or not
-          const _query = await getPlayer(res.address);
+          const _query = await getPlayerData(res.address);
           
           if(_query.data && _query.data.empty){ // player does not exist
             // new player
             navigate('/select', {state: {address: res.address}});
-          }else{
+          }else{  // existing player
+            localStorage.setItem('padd',res.address); // HIGH RISK: need to make sure that this is secure upon refresh
             const playerData = _query.data.docs[0].data();
             dispatch(setInit({  
               ...playerData,

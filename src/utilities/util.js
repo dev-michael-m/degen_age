@@ -17,13 +17,13 @@ const truncate = (_num) => {
     return temp / step;
 }
 
-export const getPlayer = (_address) => {
+export const getPlayerData = (_address) => {
     return new Promise(async(resolve,reject) => {
         try {
             const _query = await getDocs(query(collection(db, 'players'), where("address","==",_address)));
             resolve({data: _query});
         } catch (error) {
-            console.error(`util.getPlayer: ${error}`);
+            console.error(`util.getPlayerData: ${error}`);
             reject({data: false, msg: error});
         }
     })
