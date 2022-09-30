@@ -1,5 +1,8 @@
 .mint-container {
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mint-wrapper {
@@ -9,4 +12,16 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.shard-mint-wrapper {
+    background-color: rgba(0,0,0,0.4);
+    padding: 44px;
+}
+
+.shards-bg {
+    background-image: url('../assets/crystal cave2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
