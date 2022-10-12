@@ -17,7 +17,6 @@ module.exports = {
          }
       }
    },
-   defaultNetwork: "mainnet",
    networks: {
       hardhat: {},
       mainnet: {

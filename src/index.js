@@ -15,6 +15,7 @@ import LorePage from './components/LorePage';
 import Premint from './components/Premint';
 
 import MintPage from './components/MintPage';
+import MintShard from './components/MintShard';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route exact path="/play" element={<HomeScreen />} />
         <Route exact path="/marketplace" element={<MarketPlace />} /> */}
         <Route exact path="/mint" element={<MintPage />} />
+        <Route exact path="/shards" element={<MintShard />} />
         <Route path="/lore/:id" element={<LorePage />} />
         <Route path="/premint" element={<Premint />} />
         <Route exact path="/" element={<Landing />} />

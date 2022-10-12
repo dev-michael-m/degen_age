@@ -1,8 +1,8 @@
 async function main() {
-    const EAP = await ethers.getContractFactory("EAP")
+    const LSOM = await ethers.getContractFactory("LSOM")
     // Start deployment, returning a promise that resolves to a contract object
-    const eap = await EAP.deploy();
-    console.log("Contract deployed to address:", eap.address);
+    const lsom = await LSOM.deploy();
+    console.log("Contract deployed to address:", lsom.address);
   }
   
   main()
