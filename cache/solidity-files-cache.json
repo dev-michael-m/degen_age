@@ -632,8 +632,8 @@
       ]
     },
     "D:\\code\\degen_age\\contracts\\LSOM.sol": {
-      "lastModificationDate": 1665369078839,
-      "contentHash": "441e2ed1ff53f2546a41d8ea627bb055",
+      "lastModificationDate": 1665616994751,
+      "contentHash": "b3f9a615567f0b370054c07792adf5e1",
       "sourceName": "contracts/LSOM.sol",
       "solcConfig": {
         "version": "0.8.1",

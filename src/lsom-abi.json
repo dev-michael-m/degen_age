@@ -124,6 +124,13 @@
   },
   {
     "inputs": [],
+    "name": "MAX_PUB_BATCH",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "MAX_SUPPLY",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -290,6 +297,15 @@
       { "internalType": "uint16", "name": "_sale_state", "type": "uint16" }
     ],
     "name": "setSaleState",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "wallets", "type": "address[]" }
+    ],
+    "name": "setWhitelist",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

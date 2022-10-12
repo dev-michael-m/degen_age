@@ -12,18 +12,20 @@ contract LSOM is ERC721A, Ownable {
     
     uint256 public MAX_SUPPLY = 252;
     uint256 public MAX_BATCH = 12;
+    uint256 public MAX_PUB_BATCH = 6;
     uint256 public GIVEAWAYS = 60;
     uint16 public sale_state;
     bool public paused;
+    mapping(address => bool) private whitelist;
     string public BASE_URL = "ipfs://QmaKBSnQhdMGBiELirGpTgaa8qcHE17DQb5do7Rjiqoo8F/";
     string public EXTENSION = ".json";
     
-    constructor() ERC721A("Degen Age: Lost Shards of Midrah", "LSOM", MAX_BATCH, MAX_SUPPLY) {}
+    constructor() ERC721A("Lost Shards of Midrah", "DLSOM", MAX_BATCH, MAX_SUPPLY) {}
 
     /* PUBLIC METHODS */
 
     /*
-    *   @dev Allows public to mint an Early Adopters Pass.  Users are only allowed to mint MAX_BATCH
+    *   @dev Allows public to mint an LSOM.  Users are only allowed to mint MAX_BATCH
     *   passes per address.
     */
     function pubMint(uint256 quantity) public
@@ -32,7 +34,7 @@ contract LSOM is ERC721A, Ownable {
         require(totalSupply() + quantity <= MAX_SUPPLY, "All shards have been minted");
         require(sale_state == 2, "Sale is currently inactive");
         require(tx.origin == msg.sender, "Contracts are not allowed to mint");
-        require(_numberMinted(msg.sender) + quantity <= MAX_BATCH, "Address is not allowed to mint more than MAX_BATCH");        
+        require(_numberMinted(msg.sender) + quantity <= MAX_PUB_BATCH, "Address is not allowed to mint more than MAX_BATCH");        
 
         _safeMint(msg.sender, quantity);
     }
@@ -46,6 +48,7 @@ contract LSOM is ERC721A, Ownable {
         require(!paused);
         require(totalSupply() + quantity <= MAX_SUPPLY, "All shards have been minted");
         require(sale_state == 1, "Sale is currently inactive");
+        require(whitelist[msg.sender], "Address is not whitelisted");
         require(tx.origin == msg.sender, "Contracts are not allowed to mint");
         require(_numberMinted(msg.sender) + quantity <= MAX_BATCH, "Address is not allowed to mint more than MAX_BATCH");        
 
@@ -73,6 +76,12 @@ contract LSOM is ERC721A, Ownable {
     */
     function tokenURI(uint256 _tokenId) public view virtual override returns(string memory){
         return string(abi.encodePacked(BASE_URL, _tokenId.toString(), EXTENSION));
+    }
+
+    function setWhitelist(address[] calldata wallets) public onlyOwner {
+        for(uint256 i = 0; i < wallets.length; i++){
+            whitelist[wallets[i]] = true;
+        }
     }
 
     /*
