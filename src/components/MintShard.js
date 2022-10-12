@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import CheckIcon from '@mui/icons-material/CheckOutlined';
 import '../stylesheet/MintPage.css';
-import { connectWalletSync, Mint } from '../utilities/util';
+import { connectWalletSync, MintShards } from '../utilities/util';
 
 const MAX_BATCH = 12;
 
@@ -28,21 +28,21 @@ const MintShard = () => {
     const [dialog,setDialog] = useState(false);
     const [txn,setTxn] = useState(null);
 
-    useEffect(() => {
-        let mounted = true;
+    // useEffect(() => {
+    //     let mounted = true;
 
-        if(mounted){
-            connectWalletSync().then(res => {
-                setWallet(res.address);
-            }).catch(error => {
-                console.error(error);
-            })
-        }
+    //     if(mounted){
+    //         connectWalletSync().then(res => {
+    //             setWallet(res.address);
+    //         }).catch(error => {
+    //             console.error(error);
+    //         })
+    //     }
 
-        return () => {
-            mounted = false;
-        }
-    },[]);
+    //     return () => {
+    //         mounted = false;
+    //     }
+    // },[]);
 
     const handleAddMint = () => {
         const _num = document.getElementById('mint-number').value;
@@ -61,7 +61,7 @@ const MintShard = () => {
     }
 
     const handleMint = () => {
-        Mint(numMint,wallet).then(res => {
+        MintShards(numMint,wallet).then(res => {
             setTxn(res.data);
             setDialog(true);
         }).catch(error => {
@@ -139,7 +139,7 @@ const MintShard = () => {
                         </IconButton>    
                     </div>
                 </div>
-                <p>FREE + gas cost</p>
+                <p>Cost: FREE + Gas</p>
                 <div>
                     <Button className='white-btn' variant="contained" onClick={wallet ? handleMint : handleWalletConnect}>{wallet ? 'Mint' : 'Connect Wallet'}</Button>
                 </div>
