@@ -18,6 +18,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Button from './Button';
 import CPIcon from '@mui/icons-material/Api';
 import SchillIcon from '../assets/schil token logo.png';
+import PlayingCard from './PlayingCard';
 
 const NAME_MIN = 5;
 const NAME_MAX = 25;
@@ -189,16 +190,16 @@ const Account = () => {
                 <h2>Select Your Warrior</h2>
                 <div className='flex-align-center flex-just-between'>
                     <div id={0} className={`char-select ${selected == 0 ? 'char-selected' : ''}`} onClick={handleImgSelect}>
-                        <img id={0} src={Elf}></img>
+                        <PlayingCard card_info={{src: Elf}} />
                     </div>
                     <div id={1} className={`char-select ${selected == 1 ? 'char-selected' : ''}`} onClick={handleImgSelect}>
-                        <img id={1} src={Wizard}></img>
+                        <PlayingCard card_info={{src: Knight}} />
                     </div>
                     <div id={2} className={`char-select ${selected == 2 ? 'char-selected' : ''}`} onClick={handleImgSelect}>
-                        <img id={2} src={Knight}></img>
+                        <PlayingCard card_info={{src: Wizard}} />
                     </div>
                     <div id={3} className={`char-select ${selected == 3 ? 'char-selected' : ''}`} onClick={handleImgSelect}>
-                        <img id={3} src={Goblin}></img>
+                        <PlayingCard card_info={{src: Goblin}} />
                     </div>
                 </div>
             </div>

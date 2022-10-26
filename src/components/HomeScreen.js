@@ -29,6 +29,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import Items from './Items';
 import env from '../../package.json';
 import { selectPlayer, setItems, setPlayerImg, setInit } from './../store/playerSlice';
+import PlayingCard from './PlayingCard';
+import ElfOverlay from '../assets/cards/card-overlay-elf-silv.png';
+import KnightOverlay from '../assets/cards/card-overlay-knight-silv.png';
+import WizardOverlay from '../assets/cards/card-overlay-wiz-silv.png';
 
 const $ = require('jquery');
 
@@ -206,8 +210,34 @@ const HomeScreen = () => {
                                 <h2 style={{color: getColorLvl(player.selected ? player.selected.lvl : 0)}}>(Lvl. {player.selected ? player.selected.lvl : 0})</h2>
                             </div>
                             <div className='nft-container'>
-                                <div className='nft-wrapper'>
-                                    <div className='card-front img-border'>
+                                <PlayingCard 
+                                    id="card-left"
+                                    card_info={{
+                                        src: player.selected && account.selected ? account.selected.img : null,
+                                        lvl: player.selected ? player.selected.lvl : 0,
+                                        overlay: ElfOverlay,
+                                        desc: "Welcome to Degen Age!"
+                                    }}                                       
+                                />
+                                <PlayingCard 
+                                    id="card-middle"
+                                    card_info={{
+                                        src: player.selected && account.selected ? account.selected.img : null,
+                                        lvl: player.selected ? player.selected.lvl : 0,
+                                        overlay: KnightOverlay,
+                                        desc: "There must be some mistake...now you must die!"
+                                    }}                                       
+                                />
+                                <PlayingCard 
+                                    id="card-right"
+                                    card_info={{
+                                        src: player.selected && account.selected ? account.selected.img : null,
+                                        lvl: player.selected ? player.selected.lvl : 0,
+                                        overlay: WizardOverlay,
+                                        desc: "Being degen means showing no mercy to those who supercede you."
+                                    }}                                       
+                                />
+                                    {/* <div className='card-front img-border'>
                                         <img src={player.selected && account.selected ? account.selected.img : null} width={400}></img>                       
                                     </div> 
                                     <div className='card-back'>
@@ -220,8 +250,7 @@ const HomeScreen = () => {
                                             <p>Range: {player.selected ? player.selected.rng : 0} </p>
                                             <p>Defense: {player.selected ? player.selected.def : 0} </p>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div> */}
                             </div>
                             <div className='spacing-small'>
                                 <Button className='primary-white' variant="contained" onClick={handleBattle}>

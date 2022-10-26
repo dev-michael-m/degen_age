@@ -1,0 +1,93 @@
+.playing-card-container {
+    width: 240px;
+    height: 336px;
+    position: relative;
+}
+
+/* CARD BASES */
+.card-base-blood {
+    background-image: url('../assets//cards/card-base-blood.jpg');
+}
+.card-base-default {
+    background-image: url('../assets//cards/card-base-default.jpg');
+}
+.card-base-gold {
+    background-image: url('../assets//cards/card-base-gold.jpg');
+}
+.card-base-legend {
+    background-image: url('../assets//cards/card-base-legend.jpg');
+}
+.card-base-vintage {
+    background-image: url('../assets//cards/card-base-vintage.jpg');
+}
+
+.playing-card-wrapper {
+    padding: 6px;
+    position: relative;
+    height: 100%;
+}
+
+.playing-card-lvl {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    z-index: 20;
+    color: white;
+    padding: 12px;
+    font-size: 12px;
+}
+
+.playing-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.card-details {
+    z-index: 20;
+    position: absolute;
+    padding: 0px 10px 0px 10px;
+}
+
+.card-details p {
+    margin: 0;
+    font-size: 12px;
+    line-height: normal;
+    text-align: center;
+}
+
+.card-img {
+    width: 300px;
+    height: 300px;
+}
+
+#card-left {
+    position: absolute;
+    top: 15px;
+    left: -25px;
+    z-index: 200;
+    transform: rotate(-8deg);
+}
+
+#card-middle {
+    position: absolute;
+    top: 0;
+    z-index: 300;
+    left: 20%;
+}
+
+#card-right {
+    position: absolute;
+    top: 15px;
+    right: -25px;
+    z-index: 100;
+    transform: rotate(8deg);
+}
+
+#card-right:hover, #card-middle:hover, #card-left:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    z-index: 500;
+    transition: 0.33s;
+}

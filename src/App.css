@@ -474,6 +474,10 @@
   width: 400px;
   height: 400px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .nft-container:hover .nft-wrapper {
