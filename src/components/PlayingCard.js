@@ -1,22 +1,15 @@
 import React from 'react';
 import '../stylesheet/PlayingCard.css';
 
-const PlayingCard = ({card_info,id}) => {
+const PlayingCard = ({card_info,id,size,hidden,className,hover}) => {
     
     return (
-        <div id={id} className='playing-card-container card-base-default'>
-            <img className='playing-card-overlay' src={card_info.overlay}></img>
-            <div className='playing-card-wrapper'>
-                <div className='playing-card-lvl'>
-                    <label>{card_info.lvl}</label>
-                </div>
+        <div id={id} className={`playing-card-container ${hover ? hover : ""} ${className ? className : ""} ${hidden ? 'card-base-back' : 'card-base-default'} ${size ? size : ""}`}>
+            {!hidden ? <div className={`playing-card-wrapper ${size ? size : ""}`}>
                 <div id="card-img">
                     <img src={card_info.src} width="100%"></img>
                 </div>
-                <div className="card-details">
-                    <p>"{card_info.desc}"</p>
-                </div>
-            </div>
+            </div> : null}
         </div>
     )
 }

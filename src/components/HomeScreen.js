@@ -30,9 +30,9 @@ import Items from './Items';
 import env from '../../package.json';
 import { selectPlayer, setItems, setPlayerImg, setInit } from './../store/playerSlice';
 import PlayingCard from './PlayingCard';
-import ElfOverlay from '../assets/cards/card-overlay-elf-silv.png';
-import KnightOverlay from '../assets/cards/card-overlay-knight-silv.png';
-import WizardOverlay from '../assets/cards/card-overlay-wiz-silv.png';
+import Card1 from '../assets/cards/elven mercenary card.png';
+import Card2 from '../assets/cards/knight king reynar card.png';
+import Card3 from '../assets/cards/malevolent elf card.png';
 
 const $ = require('jquery');
 
@@ -213,28 +213,19 @@ const HomeScreen = () => {
                                 <PlayingCard 
                                     id="card-left"
                                     card_info={{
-                                        src: player.selected && account.selected ? account.selected.img : null,
-                                        lvl: player.selected ? player.selected.lvl : 0,
-                                        overlay: ElfOverlay,
-                                        desc: "Welcome to Degen Age!"
+                                        src: Card1,
                                     }}                                       
                                 />
                                 <PlayingCard 
                                     id="card-middle"
                                     card_info={{
-                                        src: player.selected && account.selected ? account.selected.img : null,
-                                        lvl: player.selected ? player.selected.lvl : 0,
-                                        overlay: KnightOverlay,
-                                        desc: "There must be some mistake...now you must die!"
+                                        src: Card2
                                     }}                                       
                                 />
                                 <PlayingCard 
                                     id="card-right"
                                     card_info={{
-                                        src: player.selected && account.selected ? account.selected.img : null,
-                                        lvl: player.selected ? player.selected.lvl : 0,
-                                        overlay: WizardOverlay,
-                                        desc: "Being degen means showing no mercy to those who supercede you."
+                                        src: Card3
                                     }}                                       
                                 />
                                     {/* <div className='card-front img-border'>

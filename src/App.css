@@ -458,7 +458,7 @@
 
 .game-log {
   width: 100%;
-  height: 250px;
+  height: 125px;
   border: none;
   color: white;
   background: transparent;
@@ -467,6 +467,7 @@
 
 .log-wrapper {
   position: relative;
+  width: 100%;
 }
 
 .nft-container {
